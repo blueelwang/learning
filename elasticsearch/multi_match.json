@@ -1,0 +1,11 @@
+{
+  "query": {
+    "multi_match": {
+      "query":                "赵云赵子龙",
+      "type":                 "best_fields",
+      "fields":               [ "title^3", "body" ],
+      "tie_breaker":          0.3,
+      "minimum_should_match": "20%"
+    }
+  }
+}

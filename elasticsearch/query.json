@@ -1,0 +1,37 @@
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match": {
+          "title": "赵云"
+        }
+      },
+      "filter": {
+        "range": {
+          "vote": {
+            "gt": 10
+          }
+        }
+      }
+    }
+  },
+  "from": 0,
+  "size": 1,
+  "highlight": {
+    "fields": {
+      "content": []
+    }
+  },
+  "aggs": {
+    "vote_stat": {
+      "terms": {
+        "field": "vote"
+      }
+    },
+    "avg_age": {
+      "avg": {
+        "field": "vote"
+      }
+    }
+  }
+}
