@@ -29,3 +29,26 @@ print(a, b)         -- A	B
 --应该尽可能的使用局部变量，有两个好处：
 --1. 避免命名冲突。
 --2. 访问局部变量的速度比全局变量更快。
+
+
+a = 3
+b = a
+a = 4
+print(b)                            --3
+a = nil
+print(b)                            --3
+-- 当我们为 table a 并设置元素，然后将 a 赋值给 b，则 a 与 b 都指向同一个内存。如果 a 设置为 nil ，则 b 同样能访问 table 的元素。
+-- 如果没有指定的变量指向a，Lua的垃圾回收机制会清理相对应的内存。
+a = {key='value'}
+b = a
+for key, value in pairs(b) do
+    print(key, value)               --key value
+end
+a['key'] = 'value2'
+for key, value in pairs(b) do
+    print(key, value)               --key value2
+end
+a = nil
+for key, value in pairs(b) do
+    print(key, value)               --key value2
+end
