@@ -3,13 +3,15 @@
 --- @version     2018-10-22 16:06:03
 ---
 
+package.path='E:/code/learning/lua_learning/basic/?.lua;./?.lua;'
+require('mysql_conf')
 local lm = require "luasql.mysql"
 
 --创建环境对象
 env = lm.mysql()
 
 --连接数据库
-conn = env:connect("tmp_test","root","...","23.236.77.86", 3306)
+conn = env:connect("tmp_test", mysql_conf.user, mysql_conf.passwd, mysql_conf.ip, mysql_conf.port)
 
 --设置数据库的编码格式
 conn:execute("SET NAMES UTF8")
