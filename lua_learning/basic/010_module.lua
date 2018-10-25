@@ -4,19 +4,23 @@
 ---
 
 package.path='E:/code/learning/lua_learning/basic/?.lua;'
-require('hello_module')
 
+-- hello_module定义处有local，这里require的返回要赋给一个变量，不然取不到hello_module变量
+local hello_module = require('hello_module')
 
 hello_module.func3();
 print(hello_module.words)
 hello_module.words = 'new value'
-print(hello_module.words)
+print(hello_module.words)           -- new value
 
+print('----------------------')
 
-
-hm = require('hello_module')   --模块重命名
+hm = require('hello_module')        -- 模块重命名
 hm.func1()
 print(hm.words)
+--这里也输出修改之后的值 new value
+--对于不同的请求实例（require 方法得到的对象）是相同的，因为 module 会被缓存到全局环境中。
+
 
 
 --[[

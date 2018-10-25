@@ -3,7 +3,9 @@
 --- @version     2018-10-22 10:31:55
 ---
 
-hello_module = {}
+-- 对于不同的请求实例（require 方法得到的对象）是相同的，因为 module 会被缓存到全局环境中。
+-- 所以在这个位置千万不要放单请求内个性信息，例如 ngx.ctx 等变量
+local hello_module = {}
 
 -- 定义一个变量
 hello_module.words = 'Hello World!'
@@ -22,7 +24,7 @@ function hello_module.func3()
     hello_module.func1()
 end
 
---local function hello_module.func3() end   --编译就不通过
+--local hello_module.func4() end   --编译就不通过
 
 
 
