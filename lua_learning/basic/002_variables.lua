@@ -39,16 +39,34 @@ a = nil
 print(b)                            --3
 -- 当我们为 table a 并设置元素，然后将 a 赋值给 b，则 a 与 b 都指向同一个内存。如果 a 设置为 nil ，则 b 同样能访问 table 的元素。
 -- 如果没有指定的变量指向a，Lua的垃圾回收机制会清理相对应的内存。
+--
 a = {key='value'}
 b = a
 for key, value in pairs(b) do
     print(key, value)               --key value
 end
+
 a['key'] = 'value2'
 for key, value in pairs(b) do
     print(key, value)               --key value2
 end
+
+a = {key = 'value3'}
+for key, value in pairs(b) do
+    print(key, value)               --key value2
+end
+
+local function change_value (data)
+    data.key = 'value4'
+end
+change_value(a)
+for key, value in pairs(b) do
+    print(key, value)               --key value2
+end
+
 a = nil
 for key, value in pairs(b) do
     print(key, value)               --key value2
 end
+
+

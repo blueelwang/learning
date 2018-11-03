@@ -18,9 +18,16 @@ end
 --3,1 = 31
 --3,2 = 32
 --3,3 = 33
+print({'One', 'Two', 'Three'} == {'One', 'Two', 'Three'})   --false table的比较和数值不同，是引用比较
 
+-- #array 稀疏矩阵用#计算出的长度不是全部的键值对数
+
+array = {[1] = 'One', [2] = 'Two', [3] = 'Three' }
+print(#array, table.concat(array, ' '))                 -- 3 One Two Three
+array = {[1] = 'One', [2] = 'Two', ['3'] = 'Three' }
+print(#array, table.concat(array, ' '))                 -- 2 One Two
 array = {'One', 'Two', 'Three'}
-print(table.concat(array, ' '))                 -- One Two Three
+print(#array, table.concat(array, ' '))                 -- 3 One Two Three
 
 table.insert(array, 'Four')
 print(table.concat(array, ' '))                 -- One Two Three Four
