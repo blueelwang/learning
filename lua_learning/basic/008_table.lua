@@ -41,4 +41,23 @@ print(table.concat(array, ' '))                 -- One Two Three Four
 table.sort (array)
 print(table.concat(array, ' '))                 -- Four One Three Two
 
+-- for pairs 会过滤值为nil的key
+for k, v in pairs({ 1, 2, nil, 3}) do
+    print(k, v)
+end
+--[[
+1	1
+2	2
+4	3
+ ]]
+
+for k, v in pairs({ 1, 2, 0, 3}) do
+    print(k, v)
+end
+--[[
+1	1
+2	2
+3   0
+4	3
+ ]]
 
