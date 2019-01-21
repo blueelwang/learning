@@ -18,6 +18,8 @@ end
 local function func2()
     print("这是一个私有函数！")
 end
+-- func2想成为私有函数，没门
+hello_module.func2 = func2;
 
 function hello_module.func3()
     func2()
