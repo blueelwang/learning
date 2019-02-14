@@ -1,7 +1,9 @@
 ---
---- @author      jianwei18@staff.weibo.com
---- @version     2018-10-22 10:31:55
+--- @author jianwei18@staff.weibo.com
+--- @version 2018-10-22 10:31:55
 ---
+
+g_data = 'global value'
 
 -- 对于不同的请求实例（require 方法得到的对象）是相同的，因为 module 会被缓存到全局环境中。
 -- 所以在这个位置千万不要放单请求内个性信息，例如 ngx.ctx 等变量
@@ -18,6 +20,7 @@ end
 local function func2()
     print("这是一个私有函数！")
 end
+
 -- func2想成为私有函数，没门
 hello_module.func2 = func2;
 

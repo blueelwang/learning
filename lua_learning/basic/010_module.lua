@@ -3,7 +3,7 @@
 --- @version 2018-10-22 10:28:06
 ---
 
-package.path='E:/code/learning/lua_learning/basic/?.lua;'
+package.path='/Users/jianwei18/code/vg/learning/lua_learning/basic/?.lua;'
 
 -- hello_module定义处有local，这里require的返回要赋给一个变量，不然取不到hello_module变量
 local hello_module = require('hello_module')
@@ -21,6 +21,7 @@ print(hm.words)
 --这里也输出修改之后的值 new value
 --对于不同的请求实例（require 方法得到的对象）是相同的，因为 module 会被缓存到全局环境中。
 
+print(g_data)       -- global value  全局变量
 
 
 --[[
@@ -32,4 +33,3 @@ export LUA_PATH="~/lua/?.lua;;"
 搜索的文件路径是从全局变量 package.cpath 获取，而这个变量则是通过环境变量 LUA_CPATH 来初始。
 搜索的策略跟上面的一样，只不过现在换成搜索的是 so 或 dll 类型的文件。如果找得到，那么 require 就会通过 package.loadlib 来加载它。
 --]]
-

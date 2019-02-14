@@ -5,3 +5,9 @@
 ---
 
 print "Hello World"
+
+local image_data = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAcQAAALQCA'
+print(image_data)
+
+image_data = string.gsub(image_data, "data:image/png;base64,", "")
+print(image_data)
