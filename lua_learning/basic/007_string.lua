@@ -1,6 +1,25 @@
 
 --- string
 
+string1 = "www.daemoncoder.com"
+string2 = 'www.daemoncoder.com'
+string3 = [[www.daemoncoder.com]]
+string4 = [[
+www.daemoncoder.com]]
+string5 = [[
+www.daemoncoder.com
+]]
+print(#string3)                     -- #是取长度符号，19
+print(#string4)                     -- 19，www.daemoncoder.com前面的换行不包含在字符串中
+print(string3 == string4)           -- true
+print(#string5)                     -- 20，多出了最后一个\n，后面的换行是字符串的一部分
+print(string3 == string5)           -- false
+print(string3 .. "\n" == string5)   -- true
+
+string6 = string.gsub(string1, 'daemoncoder', 'DaemonCoder')
+print(string1)                      -- www.daemoncoder.com string1的值没有被改变
+print(string6)                      -- www.DaemonCoder.com
+
 string1 = "Lua"
 print("\"字符串 1 是\"",string1)    -- "字符串 1 是"	Lua
 string2 = 'runoob.com'

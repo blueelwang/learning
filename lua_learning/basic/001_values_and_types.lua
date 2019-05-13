@@ -11,6 +11,13 @@
 
 --- number
 --  表示双精度类型的实浮点数
+print(type(2))
+print(type(2.2))
+print(type(0.2))
+print(type(2e+1))                   --  2e+1  ==  20
+print(type(0.2e-1))
+print(type(7.8263692594256e-06))
+print(0.1 + 0.2 == 0.3)             --  false
 
 --- string
 --  字符串由一对双引号或单引号来表示，也可以用2个方括号 "[[]]" 来表示多行的字符串

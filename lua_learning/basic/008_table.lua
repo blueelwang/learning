@@ -1,4 +1,11 @@
 
+t1 = {}
+t2 = {}
+t2[t1] = 'www.daemoncoder.com'
+print(t2[t1])           -- www.daemoncoder.com
+print(t2['t1'])         -- nil
+print(t2.t1)            -- nil
+
 matrix = {
     {'11', '12', '13'},
     {'21', '22', '23'},
