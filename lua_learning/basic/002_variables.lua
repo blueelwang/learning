@@ -38,44 +38,94 @@ print(a, b) -- A	B
 --1. 避免命名冲突。
 --2. 访问局部变量的速度比全局变量更快。
 
-
-a = 3
+--- 示例1
+-- lua变量的赋值类似C语言的指针赋值
+a = 3       -- a变量类似C语言的一个指针，指向一块内存区域，这块内存的内容是3
+b = a       -- 把a指针的指向的地址，赋值给b，此时a,b指向同一块内存，都是3
+print(a, b) -- 3   3
+a = 4       -- 修改a指针的地址，指向一个新的内存，存储的值是4，此时b指针还是指向原来的内存，没有改变
+print(a, b) -- 4   3
 b = a
+a = nil     -- 把a指针清空，只是清除了a指针保存的地址，没有清除指向地址所存储的内容，
+print(a, b) -- nil 3
+
+--- 示例2
+-- 字符串变量的赋值，和数值原理相同
+a = "A"
+b = a
+a = "a"
+print(b) --A
+a = nil
+print(b) --A
+
+--- 示例3
+-- table赋值
+a = { key = 'value1' }
+b = a  -- 把a赋值给b,此时a,b指向同一块内存地址
+for key, value in pairs(b) do
+    print(key, value) --key value1
+end
+a['key'] = 'value2'  -- 修改a指向内存存储的值，因为此时a,b指向同一块内存，b也会被影响
+for key, value in pairs(b) do
+    print(key, value) --key value2
+end
+a = nil  -- 把a指针设置为nil，原来指向的内存没被改变，b指向还是指向原来的内存，不受影响
+for key, value in pairs(b) do
+    print(key, value) --key value2
+end
+
+--- 示例4
+-- table赋值
+a = { key = 'value1' }
+b = a
+a = { key = 'value2' }  -- 把a指针指向一块新的内存地睛，此时a,b指针指向不再相同，b的指向和对应的内存没变
+for key, value in pairs(b) do
+    print(key, value) --key value1
+end
+
+a = { key = 'value1' }
+b = a
+a = nil  -- 把a指针设置为nil，原来指向的内存没被改变，b指向还是指向原来的内存，不受影响
+for key, value in pairs(b) do
+    print(key, value) --key value1
+end
+
+--[[
+上面的几种示例，都是进行了这几步操作
+    1. 对a赋一个初始值
+    2. 把a赋值给b
+    3. 修改a
+    4. 看b是否也被修改
+然后步骤4的结果表现出不一致的情况，数字类型（示例1）和字符串类型（示例2）的b不会被修改，
+而表类型却有的被修改（示例3），有的没被修改（示例4）。最根本的原因在于第3步修改a时，是否在修改了a的指向。
+如果修改a是修改了a指向的地址，则b不被影响，如：
 a = 4
-print(b) --3
-a = nil
-print(b) --3
--- 当我们为 table a 并设置元素，然后将 a 赋值给 b，则 a 与 b 都指向同一个内存。如果 a 设置为 nil ，则 b 同样能访问 table 的元素。
--- 如果没有指定的变量指向a，Lua的垃圾回收机制会清理相对应的内存。
---
-a = { key = 'value' }
-b = a
-for key, value in pairs(b) do
-    print(key, value) --key value
-end
-
-a['key'] = 'value2'
-for key, value in pairs(b) do
-    print(key, value) --key value2
-end
-
+a = 'a'
 a = { key = 'value3' }
-for key, value in pairs(b) do
+如果没有修改a的指向，而是修改a指向地址所存储的值，则b也会被影响，如：
+a['key'] = 'value2'
+]]
+
+-- 函数传参（表）
+a = { key = 'value1' }
+local function change_table_value(b)
+    -- 此时a,b指向同一块内存，下面的改动没有改变a,b指针的指向，但是改变了他们指向地址所存储的内容
+    b.key = 'value2'
+end
+
+change_table_value(a)
+for key, value in pairs(a) do
     print(key, value) --key value2
 end
 
-local function change_value(data)
-    data.key = 'value4'
+a = { key = 'value1' }
+local function change_to_new_table(b)
+    -- 此时a,b指向同一块内存，下面的改动把b指向一块新的内存，没有改变a指针的指向，更没有改变a指向内存存储的内容
+    b = { key = 'value2' }
 end
-
-change_value(a)
-for key, value in pairs(b) do
-    print(key, value) --key value2
-end
-
-a = nil
-for key, value in pairs(b) do
-    print(key, value) --key value2
+change_to_new_table(a)
+for key, value in pairs(a) do
+    print(key, value) --key value1
 end
 
 
