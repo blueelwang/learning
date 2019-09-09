@@ -8,3 +8,8 @@ elseif (0) then
 else
     print("0 为 false")
 end
+
+
+if 2 > 1 then
+    print('yes')
+end

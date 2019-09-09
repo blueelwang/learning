@@ -92,3 +92,37 @@ until i >= 5      -- 括号可省略
 --- break 语句
 --Lua 编程语言 break 语句插入在循环体中，用于退出当前循环或语句，并开始脚本执行紧接着的语句。
 --- lua中没有continue
+local sum = 0
+for i = 1, 100 do
+    sum = sum + i
+    if (sum > 100) then
+        print(i)
+        break
+    end
+end
+
+function get_pairs_by_sum(data, target_sum)
+    for i = 1, #data do
+        for j = i + 1, #data do
+            if data[i] + data[j] == target_sum then
+                return data[i], data[j]
+            end
+        end
+    end
+end
+local data = { 2, 3, 10, 6, 92, 37, 72 }
+local target_sum = 16
+print(get_pairs_by_sum(data, target_sum))
+
+i = 0
+while i < 10 do
+    :: redo ::
+    i = i + 1
+    if i % 2 == 1 then
+        goto continue
+    else
+        print(i)
+        goto redo
+    end
+    :: continue ::
+end
