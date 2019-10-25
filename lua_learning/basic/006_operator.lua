@@ -96,6 +96,18 @@ else
     print('false')  -- 会执行到这里
 end
 
+-- Lua中没有 ?: 三目表达式，可能通过 and or 组合实现类似的功能
+a = nil
+b = a and 'OK' or 'NO'
+print(b)    -- NO
+a = 0
+b = a and 'OK' or 'NO'
+print(b)    -- OK
+a = 1
+b = a and 'OK' or 'NO'
+print(b)    -- OK
+
+
 ---5.3提供了位运算，5.2及以下会报错
 
 -- &    按位与

@@ -7,6 +7,12 @@
 --optional_function_scope: 该参数是可选的制定函数是全局函数还是局部函数，默认全局，加local为局部函数。
 --result_params_comma_separated: 函数返回值，Lua语言函数可以返回多个值，每个值以逗号隔开
 
+local function sum(a, b)
+    return a + b
+end
+print(sum(2, 3))    -- 5
+
+--print(add(3,4,5,6,7))           -- add在后面，此时调用会出错，add还没有定义，是在nil上调用
 function add(...)
     local s = 0
     for i, v in ipairs{...} do      -- {...} 表示一个由所有变长参数构成的数组
