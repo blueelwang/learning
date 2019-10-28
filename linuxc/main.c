@@ -1,7 +1,4 @@
-#include "net/tcp_server_demo.c"
-//#include "net/sock_addr_demo.c"
-//#include "net/socket_api.c"
-//#include "net/byte_order.c"
+#include "net/pipe.c"
 
 int main() {
     demo();
