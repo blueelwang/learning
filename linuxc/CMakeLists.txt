@@ -3,4 +3,4 @@ project(linuxc)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(linuxc main.c net process)
+add_executable(linuxc main.c net process user)
