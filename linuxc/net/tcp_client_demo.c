@@ -22,8 +22,9 @@ void demo() {
         printf("connect failed, errno:%d\n", errno);
     }
 
-    char data[] = "I'm data!";
+    char data[] = "www.daemoncoder.com";
     send(sockfd, data, strlen(data), 0);
 
     close(sockfd);
 }
+

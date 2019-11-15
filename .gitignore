@@ -1,3 +1,6 @@
 .idea
 linuxc/cmake-build-debug
 linuxc/.idea
+.vscode
+vue_learning/.vscode
+.gitignore

@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <assert.h>
 #include <sys/socket.h>
@@ -7,14 +8,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
 void demo() {
-
+    // www.daemoncoder.com
     const char *ip = "127.0.0.1";
     int port = 10086;
-
     // PF_INET、PF_INET6、PF_UNIX
-    // SOCK_STREAM、SOCK_DGRAM、SOCK_RAW  linux 2.6.17起，可附加 SOCK_NONBLOCK SOCK_CLOEXEC
+    // SOCK_STREAM、SOCK_DGRAM、SOCK_RAW
+    // linux 2.6.17起，可附加 SOCK_NONBLOCK SOCK_CLOEXEC
     int sockfd = socket(PF_INET, SOCK_STREAM, 0);
     assert(sockfd > 0);
 
@@ -26,7 +26,6 @@ void demo() {
     address.sin_family = AF_INET;
     inet_pton(AF_INET, ip, &address.sin_addr);
     address.sin_port = htons(port);
-
     int ret = bind(sockfd, (struct sockaddr *)&address, sizeof(address));
     if (-1 == ret) {
         if (errno == EACCES) {
@@ -40,7 +39,6 @@ void demo() {
 
     ret = listen(sockfd, 1024);
     assert(0 == ret);
-
     int i = 0;
     while (i++ < 3) {
         struct sockaddr_in client;
@@ -50,14 +48,14 @@ void demo() {
             printf("accept failed, errno:%d\n", errno);
         } else {
             char client_ip[INET_ADDRSTRLEN];
-            printf("connected with %s:%d\n", inet_ntop(AF_INET, &client.sin_addr, client_ip, INET_ADDRSTRLEN), ntohs(client.sin_port));
+            printf("connected with %s:%d\n",
+                    inet_ntop(AF_INET, &client.sin_addr, client_ip, INET_ADDRSTRLEN),
+                    ntohs(client.sin_port));
             char data[1024];
             recv(connfd, data, 1024, 0);
             printf("receive data:%s\n", data);
 
         }
-
     }
-
     close(sockfd);
 }

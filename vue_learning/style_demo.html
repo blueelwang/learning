@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+
+<body>
+
+    <div id="app-1">
+        <!-- 
+            isActive 为 true 时，class 中添加 active，此时 class 为 static active
+            当 isActive 或者 hasError 的值变化时，class 列表将相应地更新。
+            例如，如果 hasError 的值为 true，class 列表将变为 "static active text-danger"。
+
+            v-bind:class 指令也可以与普通的 class 属性共存 
+        -->
+        <div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }">asdf</div>
+
+        <!-- 用数组指定样式 -->
+        <div v-bind:class="[activeClass, errorClass]"></div>
+        <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
+        <div v-bind:class="[{ active: isActive }, errorClass]"></div>
+
+        <!-- 内联样式 -->
+        <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+        <div v-bind:style="[baseStyles, overridingStyles]"></div>
+        <!-- 当 v-bind:style 使用需要添加浏览器引擎前缀的 CSS 属性时，如 transform，Vue.js 会自动侦测并添加相应的前缀。 -->
+
+        <!-- 从 2.3.0 起你可以为 style 绑定中的属性提供一个包含多个值的数组，常用于提供多个带前缀的值，例如： -->
+        <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
+
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: "#app-1",
+            data: {
+                isActive: true,
+                hasError: false,
+                activeClass: 'active',
+                errorClass: 'text-danger',
+                activeColor: 'red',
+                fontSize: 30,
+                baseStyles: 'baseStylesClass',
+                overridingStyles: 'overridingStylesClass',
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- {{ 里面指定Vue.$data中的一个变量 把内容解析成纯文本，不当做html处理 }} -->
+        <div>{{ message }}</div>
+        <!-- {{ 这里还可以用js表达式 }} -->
+        <div>{{ "message内容长度为：" + message.length }}</div>
+        <div>message内容转为在写为：{{ message.toUpperCase() }}</div>
+        <div>{{ message ? 'message不空' : 'message为空' }}</div>
+        <!-- 
+            这是语句，不是表达式，不会输出       <div>{{ var a = 1 }}</div>
+            流控制也不会生效，请使用三元表达式    <div>{{ if (ok) { return message } }}</div>
+        -->
+        <!-- 模板表达式都被放在沙盒中，只能访问全局变量的一个白名单，如 Math 和 Date 。你不应该在模板表达式中试图访问用户定义的全局变量。 -->
+        
+        <!-- v-html方输出html span标签被替换成对应html内容 -->
+        <div><span v-html="message"></span></div>
+        
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello <b>Vue</b>!',
+            }
+        })
+    </script>
+
+
+    <div id="app-2">
+        <!-- 
+            {{ message }} 方式不能用在html特性上，这种情况用 v-bind指令 
+            下面会被替换为：<span title="我是title内容">
+        -->
+        <span v-bind:title="message">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+        
+        <!-- 对于输出布尔值 true则输出：title="true", 如果为undefined,null,false则属性不输出 -->
+        <span v-bind:testAttr="boolValue" v-bind:testAttr="undefinedVar">
+                布尔值测试
+        </span>
+
+        <!-- 设置表单的值，同步到 inputValue 变量 -->
+        <p>{{ inputValue }}</p>
+        <div></div><input v-model="inputValue" /></div>
+    </div>
+    <script type="text/javascript">
+        var app2 = new Vue({
+            el: '#app-2',
+            data: {
+                message: '我是title内容',
+                inputValue: "我是input内容",
+                boolValue: true,
+                undefinedVar: null,
+            }
+        })
+    </script>
+
+
+    <!-- 
+        指令，如 v-bind:title="message", v-if="seen", v-on:click="clickfunc" 等
+        一些指令能够接收一个“参数”，在指令名称之后以冒号表示。
+
+        从 2.6.0 开始，支持动态参数，即可以用方括号括起来的 JavaScript 表达式作为一个指令的参数，如：
+        <a v-bind:[attributeName]="url"> ... </a>
+        如果你的 Vue 实例有一个 data 属性 attributeName，其值为 "href"，那么这个绑定将等价于 v-bind:href
+
+        修饰符
+        修饰符 (modifier) 是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。
+        例如，.prevent 修饰符告诉 v-on 指令对于触发的事件调用 event.preventDefault()
+        <form v-on:submit.prevent="onSubmit">...</form>
+
+        缩写
+        v-bind 缩写：
+        <a :href="url">...</a>
+        v-on 缩写：
+        <a @click="doSomething">...</a>
+    -->
+    <div id="app-3">
+        <a v-bind:href="url" > 动态参数示例，实测有问题 </a> 
+        <!-- v-if指令，被指定的变量为真则展示，否则整个p标签不输出 -->
+        <p v-if="seen">现在你看到我了</p>
+    </div>
+    <script type="text/javascript">
+        var app3 = new Vue({
+            el: '#app-3',
+            data: {
+                hrefvar: "href",
+                url: "https://www.daemoncoder.com/",
+                targetVar: "target",
+                targetValue: "_blank",
+                seen: true,
+            }
+        })
+    </script>
+
+    <div id="app-4">
+        <ol>
+            <!-- v-for指令，li标签被循环输出 -->
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+    <script type="text/javascript">
+        var app4 = new Vue({
+            el: '#app-4',
+            data: {
+                todos: [
+                    { text: '学习 JavaScript' },
+                    { text: '学习 Vue' },
+                    { text: '整个牛项目' }
+                ]
+            }
+        })
+    </script>
+
+    <div id="app-5">
+        <p>{{ message }}</p>
+        <!-- v-on指令，用于监听 DOM 事件 -->
+        <!-- 监听click事件，触发调用 reverseMessage() -->
+        <button v-on:click="reverseMessage">反转消息</button>
+    </div>
+    <script type="text/javascript">
+        var app5 = new Vue({
+            el: '#app-5',
+            data: {
+                message: 'Hello Vue.js!'
+            },
+            methods: {
+                reverseMessage: function () {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+
+
+    <!-- 
+        计算属性
+        在模板中放入太多的逻辑会让模板过重且难以维护，对于任何复杂逻辑，你都应当使用计算属性
+        注意：
+        计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。
+        这就意味着只要 message 还没有发生改变，多次访问 reversedMessage 计算属性不会多次执行函数，
+        而是返回之前的计算结果。函数中有 Date.now() 时需要注意。
+    -->
+    <div id="app-6">
+        <p>Original message: "{{ message }}"</p>
+        <p>Computed reversed message: "{{ reversedMessage }}"</p>
+        <p>Reversed message: "{{ reversedMessageFunc() }}"</p>
+    </div>
+    <script type="text/javascript">
+        var app6 = new Vue({
+            el: '#app-6',
+            data: {
+                message: "1234767"
+            },
+            computed: {
+                // 通过计算属性生成，有缓存，只有 message 的值发生了改变才会重新计算
+                reversedMessage: function () {
+                    return this.message.split('').reverse().join('')
+                }
+            },
+            methods: {
+                // 通过调用方法生成，没有缓存，每次都会重新执行
+                reversedMessageFunc: function () {
+                    return this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+
+    <!-- 
+        侦听器 
+        使用 watch 选项允许我们执行异步操作 (访问一个 API)，限制我们执行该操作的频率，
+        并在我们得到最终结果前，设置中间状态。这些都是计算属性无法做到的。
+    -->
+    <div id="watch-example">
+        <p>
+            Ask a yes/no question:
+            <input v-model="question">
+        </p>
+        <p>{{ answer }}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script type="text/javascript">
+        var watchExampleVM = new Vue({
+            el: '#watch-example',
+            data: {
+                question: '',
+                answer: 'I cannot give you an answer until you ask a question!'
+            },
+            watch: {
+                // 如果 `question` 发生改变，这个函数就会运行
+                question: function (newQuestion, oldQuestion) {
+                    this.answer = 'Waiting for you to stop typing...'
+                    this.debouncedGetAnswer()
+                }
+            },
+            created: function () {
+                // `_.debounce` 是一个通过 Lodash 限制操作频率的函数。
+                // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率
+                // AJAX 请求直到用户输入完毕才会发出。想要了解更多关于
+                // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，
+                // 请参考：https://lodash.com/docs#debounce
+                this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+            },
+            methods: {
+                getAnswer: function () {
+                    if (this.question.indexOf('?') === -1) {
+                        this.answer = 'Questions usually contain a question mark. ;-)'
+                        return
+                    }
+                    this.answer = 'Thinking...'
+                    var vm = this
+                    axios.get('https://yesno.wtf/api')
+                        .then(function (response) {
+                            vm.answer = _.capitalize(response.data.answer)
+                        })
+                        .catch(function (error) {
+                            vm.answer = 'Error! Could not reach the API. ' + error
+                        })
+                }
+            }
+        })
+    </script>
+
+
+
+
+    <div id="app-8"> 
+        <ol>
+            <!--
+              现在我们为每个 todo-item 提供 todo 对象
+              todo 对象是变量，即其内容可以是动态的。
+              我们也需要为每个组件提供一个“key”，稍后再
+              作详细解释。
+            -->
+            <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+        </ol>
+    </div>
+    <script type="text/javascript">
+        Vue.component('todo-item', {
+            props: ['todo'],
+            template: '<li>{{ todo.text }}</li>'
+        })
+        var app7 = new Vue({
+            el: '#app-8',
+            data: {
+                groceryList: [
+                    { id: 0, text: '蔬菜' },
+                    { id: 1, text: '奶酪' },
+                    { id: 2, text: '随便其它什么人吃的东西' }
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>
