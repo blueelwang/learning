@@ -18,9 +18,9 @@ data[5] = 99
 ngx.say(json.encode(data))
 
 
-ngx.say(cjson.encode({}))                       -- {}
-ngx.say(cjson.encode({dogs = {}}))              -- {"dogs":{}}
+ngx.say(json.encode({}))                       -- {}
+ngx.say(json.encode({dogs = {}}))              -- {"dogs":{}}
 
 json.encode_empty_table_as_object(false)
-print(cjson.encode({}))                         -- []
-print(cjson.encode({dogs = {}}))                -- {"dogs":[]}
+print(json.encode({}))                         -- []
+print(json.encode({dogs = {}}))                -- {"dogs":[]}
