@@ -1,0 +1,105 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+
+<body>
+
+    <div id="app-1">
+        <!-- v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 truthy 值的时候被渲染 -->
+        <h1 v-if="boolval">Yes</h1>
+
+        <!-- 也可以用 v-else 添加一个“else 块”，else可以用在和if不同的标签上 -->
+        <!-- v-else 元素必须紧跟在带 v-if 或者 v-else-if 的元素的后面，否则它将不会被识别 -->
+        <h1 v-if="boolval">true</h1>
+        <h2 v-else="boolval">false</h2>
+        <!-- v-else-if 2.1.0 新增 -->
+        <div v-if="type === 'A'">
+            A
+        </div>
+        <div v-else-if="type === 'B'">
+            B
+        </div>
+        <div v-else>
+            Not A or B
+        </div>
+
+        <!-- 
+            在 <template> 元素上使用 v-if 条件渲染分组 
+            因为 v-if 是一个指令，所以必须将它添加到一个元素上。如果想切换多个元素，可以把一个 
+            <template> 元素当做不可见的包裹元素，并在上面使用 v-if。
+            最终的渲染结果将不包含 <template> 元素
+        -->
+        <template v-if="boolval">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </template>
+
+        <!-- 
+            用 key 管理可复用的元素
+            Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染。
+        -->
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address">
+        </template>
+        <div><button @click="toggleLoginType()">Toggle login type</button></div>
+        <!-- 
+            上面的代码中切换 loginType 将不会清除用户已经输入的内容。
+            因为两个模板使用了相同的元素，<input> 不会被替换掉——仅仅是替换了它的 placeholder
+            这样也不总是符合实际需求，如果不需要复用，可以添加一个具有唯一值的 key 属性
+        -->
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email-input">
+        </template>
+        <!-- 
+            上面这样，每次切换时，输入框都将被重新渲染
+            注意，<label> 元素仍然会被高效地复用，因为它们没有添加 key 属性
+        -->
+
+        <!-- 当 v-if 与 v-for 一起使用时，v-for 具有比 v-if 更高的优先级 -->
+
+
+
+        
+        <!-- v-show -->
+        <!--
+            另一个用于根据条件展示元素的选项是 v-show 指令，用法和 v-if 大致一样，但是不支持 v-else
+            最在的区别是，带有 v-show 的元素始终会被渲染并保留在 DOM 中。
+            v-show 只是简单地切换元素的 CSS 属性 display
+        -->
+        <h1 v-show="!boolval">v-show</h1>
+
+
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: "#app-1",
+            data: {
+                boolval: true,
+                type: 'C',
+                loginType: 'username',
+            },
+            methods: {
+                toggleLoginType() {
+                    this.loginType = this.loginType == 'username' ? 'email' : 'username';
+                }
+            },
+        });
+    </script>
+
+</body>
+
+</html>

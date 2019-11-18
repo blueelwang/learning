@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+
+<body>
+
+    <div id="app-1">
+        <!-- 可以用 v-on 指令监听 DOM 事件，并在触发时运行一些 JavaScript 代码。 -->
+        <div id="example-1">
+            <button v-on:click="counter += 1">+1</button>
+            <p>The button above has been clicked {{ counter }} times.</p>
+        </div>
+
+        <!--
+            然而许多事件处理逻辑会更为复杂，所以直接把 JavaScript 代码写在 v-on 指令中是不可行的。
+            因此 v-on 还可以接收一个需要调用的方法名称。
+        -->
+        <div id="example-2">
+            <!-- `greet` 是在下面定义的方法名 -->
+            <button v-on:click="greet">Greet</button>
+        </div>
+
+        <!-- 除了直接绑定到一个方法，也可以在内联 JavaScript 语句中调用方法：-->
+        <div id="example-3">
+            <button v-on:click="say('hi')">Say hi</button>
+            <button v-on:click="say('what')">Say what</button>
+            <!-- 内联语句处理器中访问原始的 DOM 事件。可以用特殊变量 $event 把它传入方法： -->
+            <button v-on:click="warn('Form cannot be submitted yet.', $event)">Submit</button>
+        </div>
+
+
+        <!--
+            事件修饰符
+            在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。
+            Vue.js 为 v-on 提供了事件修饰符。之前提过，修饰符是由点开头的指令后缀来表示的。
+                .stop
+                .prevent
+                .capture
+                .self
+                .once
+                .passive
+        -->
+        <!-- 阻止单击事件继续传播 -->
+        <a v-on:click.stop="greet"></a>
+        <!-- 提交事件不再重载页面 -->
+        <form v-on:submit.prevent="greet"></form>
+        <!-- 修饰符可以串联 -->
+        <a v-on:click.stop.prevent="greet"></a>
+        <!-- 只有修饰符 -->
+        <form v-on:submit.prevent></form>
+        <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+        <!-- 即事件不是从内部元素触发的 -->
+        <div v-on:click.self="greet"></div>
+        <!-- 添加事件监听器时使用事件捕获模式 -->
+        <!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理，下面弹窗顺序是2、3、5、4、1-->
+        <div v-on:click="say('1')">
+            <div v-on:click.capture="say('2')">
+                <div v-on:click.capture="say('3')">
+                    <div v-on:click="say('4')">
+                        <button v-on:click="say('5')">.capture</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 点击事件将只会触发一次   2.1.4 新增 -->
+        <a v-on:click.once="greet"></a>
+        <!-- Vue 还对应 addEventListener 中的 passive 选项提供了 .passive 修饰符 -->
+        <!-- passive表示不会调用 e.preventDefault()，如果调用了也不会生效，还会产生一条警告 -->
+        
+
+        <!--
+            系统修饰键   2.1.0 新增
+            可以用如下修饰符来实现仅在按下相应按键时才触发鼠标或键盘事件的监听器。
+            .ctrl
+            .alt
+            .shift
+            .meta
+        -->
+
+
+        <!--
+            鼠标按钮修饰符   2.2.0 新增
+            .left
+            .right
+            .middle
+        -->
+
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: "#app-1",
+            data: {
+                counter: 0
+            },
+            methods: {
+                greet: function (event) {
+                    // `this` 在方法里指向当前 Vue 实例
+                    alert('he button above has been clicked ' + this.counter + ' times.')
+                    // `event` 是原生 DOM 事件
+                    if (event) {
+                        alert(event.target.tagName)
+                    }
+                },
+                say: function (message) {
+                    alert(message)
+                },
+                warn: function (message, event) {
+                    // 现在我们可以访问原生事件对象
+                    if (event) {
+                        event.preventDefault()
+                    }
+                    alert(message)
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
