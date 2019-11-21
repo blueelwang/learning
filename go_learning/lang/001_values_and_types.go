@@ -4,7 +4,7 @@ import "fmt"
 
 var a = 3   // 全局变量
 
-func main() { // { 不能在像C++那样单独的一行
+func demo001() { // { 不能在像C++那样单独的一行
     // 我是注释
     /*
     我也是注释
@@ -62,6 +62,10 @@ func main() { // { 不能在像C++那样单独的一行
     var c128 complex128 = 180 + 23i
     fmt.Println(intvalue, uintvalue, int8value, fvalue, fvalue2, c128)
 
+    // 支持八进制、十六进制表示
+    fmt.Println(0x0a)   // 10
+    fmt.Println(0101)   // 65
+
     /* 字符串 */
     // 用双引号定义，单引号只用于表示字符，同Java
     // Go 语言的字符串的字节使用 UTF-8 编码标识 Unicode 文本。
@@ -69,6 +73,12 @@ func main() { // { 不能在像C++那样单独的一行
     var charvalue = 'a'         // char不是类型名，不能写成: var charvalue char = 'a'
     fmt.Println(stringvalue)
     fmt.Println(charvalue)      // 输出： 97
+    fmt.Println("a\tbc\x64\x65\0777")    // a    bcde
+    // 跨行字符串，第一个换行不包含在字符串，最后一个包含
+    longstring := `
+    123480
+    `
+    fmt.Println(longstring)
 
     /* 
         派生类型:
@@ -82,6 +92,8 @@ func main() { // { 不能在像C++那样单独的一行
         (g) 接口类型（interface）
         (h) Map 类型
     */
+    strings := []string{"google", "runoob"}
+    numbers := [6]int{1, 2, 3, 5}
     
 
 
@@ -116,6 +128,11 @@ func main() { // { 不能在像C++那样单独的一行
     _, v10 := 3, 4
     // 交换两个变量的值
     v1, v2 = v2, v1     // 两个变量的类型必须是相同
+
+
+    // GO是强类型语言
+    // 声明的一个变量之后，就不能再把其类型的值赋值给它，这一点和PHP等弱类型语言不同
+    // v2 = "abc"
 
 
     // 变量赋值
