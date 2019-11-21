@@ -1,0 +1,9 @@
+{
+	"typeAcquisition": {
+	  "enable": true,
+	  "exclude": [
+		"dom"
+	  ]
+	},
+	"exclude": ["node_modules", "dist"]
+}

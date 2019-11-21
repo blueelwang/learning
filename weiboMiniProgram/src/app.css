@@ -1,0 +1,22 @@
+.title {
+  margin: 10px 5vw;
+}
+.button {
+  margin: 0px 5vw 0px 5vw;
+  width: 90vw;
+  color: #fff;
+  background-color: #108ee9;
+  border: 1px solid #108ee9;
+  border-radius: 5px;
+}
+.action {
+  color: gray;
+  margin: 10px 5vw;
+}
+.center-in-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

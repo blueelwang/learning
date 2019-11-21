@@ -1,0 +1,7 @@
+{
+	"pages":["pages/first/first"],
+	"window": {
+	  "navigationBarBackgroundColor":"#ffffff",
+	  "navigationBarTextStyle": "black"
+	}
+}

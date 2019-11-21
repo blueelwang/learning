@@ -16,6 +16,29 @@
         <button-counter></button-counter>
         <button-counter></button-counter>
         <button-counter></button-counter>
+        <hr/>
+
+        <!-- prop 被注册之后，就可以像这样把数据作为一个自定义属性传递进来 -->
+        <blog-post title="My journey with Vue"></blog-post>
+        <blog-post title="Blogging with Vue"></blog-post>
+        <blog-post title="Why Vue is so fun"></blog-post>
+        <hr/>
+        <!-- 传入动态绑定数据 -->
+        <blog-post 
+            v-for="post in posts"
+            v-bind:key="post.id"
+            v-bind:title="post.title"
+            v-bind:pubtime="post.publishedAt"
+        ></blog-post>
+        <hr/>
+
+        <!-- 传入prop一个对象 -->
+        <blog-post2 
+            v-for="post in posts" 
+            v-bind:key="post.id" 
+            v-bind:post="post"
+        ></blog-post2>
+
     </div>
     <script type="text/javascript">
         /*
@@ -36,10 +59,29 @@
             },
             template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
         })
-
+        /*
+        Prop 是你可以在组件上注册的一些自定义特性。当一个值传递给一个 prop 特性的时候，它就变成了那个组件实例的一个属性。
+        为了给博文组件传递一个标题，我们可以用一个 props 选项将其包含在该组件可接受的 prop 列表中。
+        在下面的模板中，能够在组件实例中访问这个值，就像访问 data 中的值一样。
+        */
+        Vue.component('blog-post', {
+            props: ['title', 'pubtime'],
+            template: '<div><h3>{{ title }}</h3> <div>发布时间：{{ pubtime }}</div></div>'
+        })
+        Vue.component('blog-post2', {
+            props: ['post'],
+            template: '<div><h3>{{ post.title }}</h3> <div>发布时间：{{ post.publishedAt }}</div></div>'
+        })
         // 组件的定义要放在使用之前，这里的Vue示例用到了端面定义的组件，所以在放在后面，不然无法渲染
         var app = new Vue({
-            el: "#app-1"
+            el: "#app-1",
+            data: {
+                posts: [
+                    { id: 1, title: 'C++ Primer', publishedAt: '2019-11-18' },
+                    { id: 2, title: 'C++ 从入门到放弃', publishedAt: '2019-11-19' },
+                    { id: 3, title: '活着', publishedAt: '2019-11-20' }
+                ]
+            }
         });
         
     </script>

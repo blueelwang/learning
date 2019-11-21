@@ -1,0 +1,12 @@
+{
+	"name": "weiboMiniProgram",
+	"version": "1.0.0",
+	"description": "weiboMiniProgram-1.0.0",
+	"main": "index.js",
+	"scripts": {},
+	"devDependencies": {
+		"wbox-typings": "http://wbox.client.weibo.cn/static/wbox-typings-0.0.1.tgz"
+	},
+	"author": "",
+	"license": "ISC"
+}
