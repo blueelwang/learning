@@ -94,7 +94,7 @@ func demo001() { // { 不能在像C++那样单独的一行
     */
     strings := []string{"google", "runoob"}
     numbers := [6]int{1, 2, 3, 5}
-    
+    fmt.Println(strings, numbers)
 
 
     // 变量声明

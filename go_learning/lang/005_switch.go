@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func demo006() {
+func demo005() {
 
     /*
     switch 语句用于基于不同条件执行不同动作，每一个 case 分支都是唯一的，从上至下逐一测试，直到匹配为止。
