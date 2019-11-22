@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+    "fmt"
+)
 
 func main() {
 
@@ -43,5 +45,5 @@ func main() {
     nums2[0] = 11
     fmt.Println(nums, nums2)    // [0 11 2 3 4] [11 2]
     
-
+    
 }

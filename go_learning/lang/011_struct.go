@@ -2,12 +2,14 @@ package main
 
 import "fmt"
 
+// Books 结构体定义
 type Books struct {
     title string
     author string
     subject string
-    book_id int
+    bookID int
 }
+// BookChartItem 结构体定义
 type BookChartItem struct {
     book Books
     num int
@@ -21,7 +23,7 @@ func demo011() {
     fmt.Println(Books{"Go 语言", "www.runoob.com", "Go 语言教程", 6495407})
 
     // 也可以使用 key => value 格式
-    fmt.Println(Books{title: "Go 语言", author: "www.runoob.com", subject: "Go 语言教程", book_id: 6495407})
+    fmt.Println(Books{title: "Go 语言", author: "www.runoob.com", subject: "Go 语言教程", bookID: 6495407})
 
     // 忽略的字段为 0 或 空
     fmt.Println(Books{title: "Go 语言", author: "www.runoob.com"})
@@ -30,9 +32,9 @@ func demo011() {
     book2 := book1              // 结构体的赋值是拷贝
     fmt.Println(book2)
     fmt.Println(book2.title)
-    book1.book_id = 3
-    fmt.Println(book1.book_id)  // 3
-    fmt.Println(book2.book_id)  // 0
+    book1.bookID = 3
+    fmt.Println(book1.bookID)  // 3
+    fmt.Println(book2.bookID)  // 0
 
 
     change1(book1)

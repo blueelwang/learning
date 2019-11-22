@@ -32,7 +32,7 @@ func hi(name string) string {
     return "Hi " + name
 }
 // 参数、返回值没有的话，可以省略
-func Hello() {
+func hello() {
     fmt.Println("Hello World!")
 }
 
@@ -98,8 +98,8 @@ func sum(vals ... int) {
 func getSequence() func() int {
     i := 0
     return func() int {
-       i += 1
-      return i
+        i++
+        return i
     }
 }
 
@@ -112,7 +112,7 @@ func (variable_name variable_type) function_name() return_type{
     ...
 }
 */
-/* 定义结构体 */
+/* Circle 结构体定义 */
 type Circle struct {
     radius float64
 }
