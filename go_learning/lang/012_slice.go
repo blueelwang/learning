@@ -4,7 +4,7 @@ import (
     "fmt"
 )
 
-func main() {
+func demo012() {
 
     // Go 语言切片是对数组的抽象。
     // 数组的长度不可改变，切片的长度是可变的，可以追加元素，在追加时可能使切片的容量增大。
@@ -39,11 +39,54 @@ func main() {
     nums2 = nums[:]             // 这里也是引用
     nums2[1] = 11111            // [0 11111 2 3 4] [0 11111 2 3 4]
     fmt.Println(nums, nums2)    // [0 111 2 3 4] [0 111 2 3 4]
-    // 将arr中从下标startIndex到endIndex-1 下的元素创建为一个新的切片
-    // nums2 := num[startIndex:endIndex] 
-    nums2 = nums[1:3]
+    nums2 = nums[1:3]           // 从下标1位置到下标3位置（不包含3）
+    fmt.Println(nums, nums2)    // [0 11111 2 3 4] [11111 2]
     nums2[0] = 11
     fmt.Println(nums, nums2)    // [0 11 2 3 4] [11 2]
+    nums2 = nums[1:]            // 从第2个元素到最后
+    fmt.Println(nums, nums2)    // [0 11 2 3 4] [2 3 4]
+    nums2 = nums[:2]            // 从下标0到下标2（不含2）
+    fmt.Println(nums, nums2)    // [0 11 2 3 4] [0 11]
+    // nums2 = nums[:-1]        // 编译报错，不支持负数语法
+    
+
+    //  len() 获取元素数    cap() 获取切片当前容量
+    fmt.Println(len(nums2), cap(nums2))     // 2 5
+    nums2 = []int{0, 1, 2, 3, 4, 5, 7, 9}
+    fmt.Println(len(nums2), cap(nums2))     // 8 8
+    nums2 = make([]int, 5, 20)
+    fmt.Println(len(nums2), cap(nums2))     // 5 20
+
+    // 切片在未初始化之前默认为 nil，长度为 0
+    var nums3 []int
+    fmt.Println(nums3, len(nums3), cap(nums3), nums3 == nil)    // [] 0 0 true
+    nums4 := []int{}
+    fmt.Println(nums4, len(nums4), cap(nums4), nums4 == nil)    // [] 0 0 false
+
+
+    // append() 函数向切片中添加元素
+    nums5 := []int{0, 1, 2}
+    nums5 = append(nums5, 3)        // 添加一个元素：3
+    fmt.Println(nums5)              // [0 1 2 3]
+    nums5 = append(nums5, 4, 5, 6)  // 添加多个元素
+    fmt.Println(nums5)              // [0 1 2 3 4 5 6]
+
+    // copy(a, b) 函数把切片b拷贝到a, 但是不会改变a的大小
+    // 如果len(a) < len(b)，则b多出的部分丢弃
+    // 如果len(a) > len(b)，则只把b中的元素对应覆盖到a，a中多出的部分还保持原值
+    nums4 = []int{1, 2, 3}
+    nums5 = []int{11, 22}
+    copy(nums4, nums5)
+    fmt.Println(nums4, nums5)   // [11 22 3] [11 22]
+
+    nums4 = []int{1, 2}
+    nums5 = []int{11, 22, 33}
+    copy(nums4, nums5)
+    fmt.Println(nums4, nums5)   // [11 22] [11 22 33]
+
+    // copy() 不同于切片的直接赋值，两个变量的修改不会相互影响
+    nums5[0] = 0
+    fmt.Println(nums4, nums5)   // [11 22] [0 22 33]
     
     
 }
