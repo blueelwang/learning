@@ -1,9 +1,9 @@
-package main
+package lang
 
 import "fmt"
 import "unsafe"
 
-func demo002() {
+func Demo002() {
 
     /* 常量 */
     const V1 = "2"	// 毕竟立即初始化，const V1 string 这样会编译报错

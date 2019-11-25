@@ -1,7 +1,6 @@
 .idea
 .vscode
 linuxc/cmake-build-debug
-linuxc/.idea
-.vscode
-vue_learning/.vscode
 .gitignore
+go_learning/bin
+go_learning/pkg

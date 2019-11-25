@@ -1,8 +1,8 @@
-package main
+package lang
 
 import "fmt"
 
-func demo003() {
+func Demo003() {
 
     /*
     算术运算符

@@ -1,8 +1,8 @@
-package main
+package lang
 
 import "fmt"
 
-func demo007() {
+func Demo007() {
     
     /*
     循环

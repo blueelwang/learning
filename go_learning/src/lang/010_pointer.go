@@ -1,8 +1,8 @@
-package main
+package lang
 
 import "fmt"
 
-func demo010() {
+func Demo010() {
 
     value := 3
     var p = &value

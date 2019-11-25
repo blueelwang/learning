@@ -1,10 +1,10 @@
-package main
+package lang
 
 import (
     "fmt"
 )
 
-func demo012() {
+func Demo012() {
 
     // Go 语言切片是对数组的抽象。
     // 数组的长度不可改变，切片的长度是可变的，可以追加元素，在追加时可能使切片的容量增大。

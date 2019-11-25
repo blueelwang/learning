@@ -1,8 +1,8 @@
-package main
+package lang
 
 import "fmt"
 
-func main() {
+func Demo014() {
 
     /*
     map 变量声明格式：
@@ -40,5 +40,28 @@ func main() {
     fmt.Println(make(map [string] [][]int))
     fmt.Println(make(map [string] func(int, int) int))
     fmt.Println(make(map [string] map[string]int))
+
+
+    var intvalue int = 30
+    var int8value int8 = 127    // 数值大小超出类型所表示的范围，编译不通过，此处不能是128
+    var fvalue float32 = 3.14
+    var fvalue2 float64 = 3.14
+    
+    intvalue = int(int8value)
+    fvalue = float32(intvalue)
+    fvalue2 = float64(int8value)
+    int8value = int8(intvalue)
+    intvalue = int(fvalue)
+    intvalue = int(fvalue2)
+    // var bvalue bool = false
+    // intvalue = int(bvalue)       // cannot convert bvalue (type bool) to type int
+    // var i int = int(23.23233)    // constant 23.2323 truncated to integer
+    var i23 float32 = 23.23233
+    var i int = int(i23)            // OK
+    // var s23 string = "23"
+    // i = int(s23)                 // cannot convert s23 (type string) to type int
+    fmt.Println(intvalue, int8value, fvalue, fvalue2, i)
+
+
 
 }

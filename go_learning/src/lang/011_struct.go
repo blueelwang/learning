@@ -1,4 +1,4 @@
-package main
+package lang
 
 import "fmt"
 
@@ -17,7 +17,7 @@ type BookChartItem struct {
 var chart [10]BookChartItem
 
 
-func demo011() {
+func Demo011() {
 
     // 创建一个新的结构体
     fmt.Println(Books{"Go 语言", "www.runoob.com", "Go 语言教程", 6495407})

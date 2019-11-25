@@ -1,10 +1,10 @@
-package main
+package lang
 
 import "fmt"
 
 var a = 3   // 全局变量
 
-func demo001() { // { 不能在像C++那样单独的一行
+func Demo001() { // { 不能在像C++那样单独的一行
     // 我是注释
     /*
     我也是注释
@@ -95,6 +95,21 @@ func demo001() { // { 不能在像C++那样单独的一行
     strings := []string{"google", "runoob"}
     numbers := [6]int{1, 2, 3, 5}
     fmt.Println(strings, numbers)
+
+    // 类型转换： type_name(expression) 转换为type_name类型
+    // 只能数字类型之间相互转换，不能和bool，string类型转换
+    intvalue = int(int8value)
+    fvalue = float32(intvalue)
+    fvalue2 = float64(int8value)
+    int8value = int8(intvalue)
+    intvalue = int(fvalue)
+    intvalue = int(fvalue2)
+    // var i int = int(23.23233)    // constant 23.2323 truncated to integer
+    // var bvalue bool = false
+    // intvalue = int(bvalue)       // cannot convert bvalue (type bool) to type int
+    // var s23 string = "23"
+    // i = int(s23)                 // cannot convert s23 (type string) to type int
+
 
 
     // 变量声明

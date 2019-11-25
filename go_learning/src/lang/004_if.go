@@ -1,8 +1,8 @@
-package main
+package lang
 
 import "fmt"
 
-func demo004() {
+func Demo004() {
 
     value := 1
     if value > 0 {
