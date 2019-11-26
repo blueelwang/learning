@@ -11,9 +11,11 @@ func Demo009() {
     var balance2 = [8]float32{1000.0, 2.0, 3.4, 7.0, 50.0}
     // 如果忽略 [] 中的数字不设置数组大小，Go 语言会根据元素的个数来设置数组的大小：
     var balance3 = [...]float32{1000.0, 2.0, 3.4, 7.0, 50.0}
+    // 注意这么定义的是切片，不能和数组互换
     var balance4 = []float32{1000.0, 2.0, 3.4, 7.0, 50.0}
     fmt.Println(nums, balance1, balance2, balance3, balance4)
     // var data1 []int = [3]int{1, 2, 3}   // cannot use [3]int literal (type [3]int) as type []int in assignment
+    
 
     // 组数读写
     nums[0] = 4
@@ -37,8 +39,10 @@ func Demo009() {
 
 
     // 数组做为函数参数传递，形参和参数定义语句必需严格一致
+    // 数组长度是数组类型的组成部分， [1O]int 和 [20]int 表示不同的类型。
     // []int{1, 2, 4}  不能 传递给 [3]int{1, 2, 3}，虽然他们实际的大小相同
     func1([3]int{1, 2, 3})
+    func1([...]int{1, 2, 3})
     // func1([]int{1, 2, 3})        // cannot use []int literal (type []int) as type [3]int in argument to func1
     // func1([4]int{1, 2, 3, 4})    // cannot use [4]int literal (type [4]int) as type [3]int in argument to func1
     func2([]int{1, 2, 3})

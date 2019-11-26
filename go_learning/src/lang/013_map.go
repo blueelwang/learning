@@ -2,7 +2,7 @@ package lang
 
 import "fmt"
 
-func Demo014() {
+func Demo013() {
 
     /*
     map 变量声明格式：
@@ -62,6 +62,16 @@ func Demo014() {
     // i = int(s23)                 // cannot convert s23 (type string) to type int
     fmt.Println(intvalue, int8value, fvalue, fvalue2, i)
 
+
+    // Go 内置的 map 不是并发安全的，并发安全的 map 可以 使用标准包 sync 中的 map
+
+    // map value类型如果是结构体，不能直接修改一个元素中的某个成员变量，必须通过整个元素赋值来修改
+    book := Books{"Go", "somebody", "", 0}
+    books := map[string]Books{"Go": book}
+    // books["Go"].bookID = 3  // cannot assign to struct field books["Go"].bookID in map
+    tmp := books["Go"]
+    tmp.bookID = 3
+    books["Go"] = tmp   // 整个元素赋值
 
 
 }

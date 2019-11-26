@@ -6,18 +6,33 @@ import (
 
 func Demo012() {
 
-    // Go 语言切片是对数组的抽象。
-    // 数组的长度不可改变，切片的长度是可变的，可以追加元素，在追加时可能使切片的容量增大。
+    /*
+    Go 语言的数组的定长性和值拷贝限制了其使用场景， Go 提供了另一种数据类型 slice (切片)
+    这是一种变长数组，其数据结构中有指向数组的指针，所以是一种引用类型 
+    slice 的定义，src/runtime/slice.go (go.19.1)
+    type slice struct {
+        array   unsafe.Pointer
+        len     int
+        cap     int
+    }
+    */
 
     // 可以声明一个未指定大小的数组来定义切片
     var nums []int
     // 切片初始化
     nums = []int{1, 2, 3}
+    // 通过数组创建切片，注意修改切片或原数组，都会相互影响
+    array := [4]int{1, 2, 3, 4}
+    nums = array[:]
+    nums[1] = 11
+    array[2] = 22
+    fmt.Println(nums, array)    // [1 11 22 4] [1 11 22 4]
     // 也可以使用make()函数来创建切片:
     nums = make([]int, 5)
     // 也可以指定容量
     nums = make([]int, 5, 20)
     //nums[6] = 10 // runtime error: index out of range
+    
 
 
     //切片的赋值是引用

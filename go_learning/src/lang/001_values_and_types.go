@@ -65,6 +65,20 @@ func Demo001() { // { 不能在像C++那样单独的一行
     // 支持八进制、十六进制表示
     fmt.Println(0x0a)   // 10
     fmt.Println(0101)   // 65
+    // 支持科学计数法
+    fmt.Println(3.14e2)     // 314
+    fmt.Println(3.14E2)     // 314
+    fmt.Println(3.14e+2)    // 314
+    fmt.Println(3.14E+2)    // 314
+    fmt.Println(3.14e-2)    // 0.0314
+    fmt.Println(3.14E-2)    // 0.0314
+
+    var char rune = '本'        // 字符型字面量
+    fmt.Println(char)           // 26412
+    fmt.Println('a')            // 97
+    fmt.Println('\x07')         // 7
+    fmt.Println('\u12e4')       // 4836
+    fmt.Println('\U00101234')   // 1053236
 
     /* 字符串 */
     // 用双引号定义，单引号只用于表示字符，同Java
@@ -79,6 +93,20 @@ func Demo001() { // { 不能在像C++那样单独的一行
     123480
     `
     fmt.Println(longstring)
+    // 宇符串可以转换为切片 []byte(s)要慎用，尤其是当数据量较大时(每转换一次都需复制内容)
+    fmt.Println([]byte(stringvalue))    // [97 230 177 137 229 173 151]
+    // 字符串是常量，可以通过类似数组的索引访问其字节单元，但是不能修改某个字节的值
+    stringvalue = "a汉字"
+    fmt.Println(stringvalue, len(stringvalue))  // a汉字 7
+    fmt.Println(stringvalue[0])         // 97
+    // stringvalue[0] = 'b'             // cannot assign to stringvalue[0]
+    // 下标是按字节来算的
+    fmt.Println(stringvalue[1])         // 230
+    fmt.Println(stringvalue[2])         // 177  汉 的编码第一个字节
+    fmt.Println(stringvalue[6])         // 151
+    // 字符串尾部不包含 \0 字符，不同于C语言
+    // fmt.Println(stringvalue[7])      // runtime error: index out of range    总大小为7，这里数组越界了
+    
 
     /* 
         派生类型:

@@ -32,4 +32,9 @@ func Demo010() {
     var ptr2 *func(int, int) int = &v
     fmt.Println((*ptr2)(1, 3))
 
+    // 指针指向一个结构体时，也和结构体变量一样，用点操作符取成员，没有像C语言中的 -> 操作符
+    book := Books{"C++", "somebody", "", 2}
+    bookptr := &book
+    fmt.Println(book.title, bookptr.author)     // C++ somebody
+
 }

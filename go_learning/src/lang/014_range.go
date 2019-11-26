@@ -5,7 +5,7 @@ import (
 )
 
 
-func Demo013() {
+func Demo014() {
 
     // Go 语言中 range 关键字用于 for 循环中迭代数组(array)、切片(slice)、通道(channel)或集合(map)的元素。
     // 在数组和切片中它返回元素的索引和索引对应的值，在集合中返回 key-value 对。
@@ -22,6 +22,7 @@ func Demo013() {
     */
     
 
+    // range也可以遍历 map，但是不保证每次选代元素的顺序。
     data := map[string]string{"a": "AAA", "b": "BBB"}
     for k, v := range data {
         fmt.Printf("%s -> %s\n", k, v)

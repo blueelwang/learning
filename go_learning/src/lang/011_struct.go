@@ -2,6 +2,11 @@ package lang
 
 import "fmt"
 
+/*
+Go语言提供了和C语言类似的结构体，来自定义一种包含多个成员的类型
+struct 的存储空间是连续的，字段按照声明时的顺序存放
+*/
+
 // Books 结构体定义
 type Books struct {
     title string
