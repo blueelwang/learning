@@ -23,7 +23,7 @@ func Demo005() {
 	level := "青铜"
 	switch level {
 	case "青铜":
-		fmt.Println("倔强" + level)
+		fmt.Println("倔强" + level)	// 注意：如果匹配上，就不再没必要显示地写 break
 	case "白银":
 		fmt.Println("轶序" + level)
 	case "黄金":
@@ -36,7 +36,7 @@ func Demo005() {
 		fmt.Println("至尊" + level)
 	case "王者":
 		fmt.Println("最强" + level)
-	default:
+	default:						// 当所有case都不匹配时，会执行default语句，default语句也可以放在任意位置
 		fmt.Println("荣耀王者")
 	}
 
@@ -56,6 +56,7 @@ func Demo005() {
 	}
 	fmt.Println(grade)
 
+	// switch 后面的表达式也是可选的，如果没有表达式， 则 case 子句是一个布尔表达式 
 	warnned := true
 	switch {
 	case marks >= 90:

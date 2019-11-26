@@ -1,14 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"lang"
 )
 
 func main() {
 
-	fmt.Println("Hello Go World!")
-	lang.Demo005()
+	println("Hello Go World!")
+	lang.Demo019()
 	
 
 }

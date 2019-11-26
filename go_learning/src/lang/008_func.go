@@ -19,6 +19,8 @@ func Demo008() {
     var c1 Circle
     c1.radius = 10
     fmt.Println("圆的面积 = ", c1.getArea())
+    
+    deferDemo()
 }
 
 /*
@@ -84,7 +86,7 @@ func dynamicAdd() {
     fmt.Printf("Calling dynamic function, function[%s] param1[%d] param2[%d] return[%d]\n", add, 1, 2, sum)
 } 
 
-// 可变参数列表
+// 可变参数列表，必需放在函数参数的最后一部分，在函数体里可以当作切片使用。
 func sum(vals ... int) {
     total := 0
     for _, val := range vals {
@@ -92,6 +94,17 @@ func sum(vals ... int) {
     }
     fmt.Println(total)
 }
+
+// 支持有名的返回值，参数名就相当于函数体内最外层的局部变量，命名返回值变量会被初始化为类型零值，最后的 return 可以不带参数名直接返回。
+func sumWithReturnName(a, b int) (sum int) {
+    sum = a + b
+    return // 因为返回参数定义处指定了变量，这里的 return 相当于 return sum，当然也可以显示地写 return sum
+}
+
+/*
+Go 语言函数没有类似Java的重载，会报错重复声明
+也不支持类似PHP的参数默认值
+*/
 
 // 闭包
 // Go语言支持匿名函数，可作为闭包。
@@ -103,9 +116,43 @@ func getSequence() func() int {
     }
 }
 
-/*
-Go 语言函数没有类似Java的重载，也不支持类似PHP的参数默认值
-*/
+// defer 关键字
+// Go 函数里提供了 defer关键字，可以注册多个延迟调用，这些调用以 先进后出 的顺序在函数返回前被执行（即最后注册的最先执行）。
+// 有点类似于 Java 语言中异常处理中的 finaly 子句。 defer 常用于保证一些资源最终一定能够得到回收和释放。
+func deferDemo() {
+    i := 1
+    defer func(i int) {
+        fmt.Printf("我在第%d个 defer 注册的方法中\n", i)
+    }(i)    // i 此时为1
+    i++
+    defer func(i int) {
+        fmt.Printf("我在第%d个 defer 注册的方法中\n", i)
+    }(i)    // i 此时为2
+    // defer 函数的实参在注册时通过值拷贝传递进去。后续再对传入的参数变量做改动，也不再会改变原来注册时传入参数的值
+    i++     // defer 方法在实际被调用时，传入的参数是在注册时i的值，这里修改不会产生影响
+    fmt.Println("我在所有 defer 注册的方法之后")
+    if true {
+        return
+    }
+    
+    // defer语句必须先注册后才能执行，如果 defer 位于 return 之后，则等于没有注册，不会执行。
+    defer func(i int) {
+        fmt.Printf("我在第%d个 defer 注册的方法中\n", i)
+    }(i)    // i 此时为1
+    /*
+    输出：
+    我在所有 defer 注册的方法之后
+    我在第2个 defer 注册的方法中
+    我在第1个 defer 注册的方法中
+    */
+
+    
+    // 注意：
+    // 主动 调用 as.Exit(int) 退出进程时，defer将不再被执行(即使已经提前注册〉。
+}
+
+
+
 
 /*
 方法
