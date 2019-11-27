@@ -124,20 +124,41 @@ func Demo001() { // { 不能在像C++那样单独的一行
     numbers := [6]int{1, 2, 3, 5}
     fmt.Println(strings, numbers)
 
-    // 类型转换： type_name(expression) 转换为type_name类型
-    // 只能数字类型之间相互转换，不能和bool，string类型转换
+    // 类型转换
+    // 语法格式: var a T = (T) (x) 使用括号将类型和要转换的变量或表达式的值括起来
+    // type_name(expression) 转换为type_name类型
+    // 类型转换需要至少满足如下条件之一：
+    //      x 可以直接赋值给T类型变量。
+    //      x 的类型和 T 相同或具有相同的底层类型
+    //      x 的类型和 T 都是未命名的指针类型，并且指针指向的类型具有相同的底层类型。
+    //      x 的类型和 T 是整型或者都是浮点型，数值类型不能和bool，string类型转换
+    //      x 的类型和 T 都是复数类型
+    //      整型 或 []byte 类型 或 []rune，可以转成 string 类型，但是 string 不能转成整型，只能转成 []byte 或 []rune ；注意：浮点型不能和string互转
+    // 注意：
+    // 数值类型和 string 类型之间的相互转换可能造成值部分丢失 ;其他的转换仅是类型的转换，不会造成值的改变 。 
+    // string 和数字之间的转换可使用标准库 strconv
     intvalue = int(int8value)
+    intvalue = (int)(int8value)
     fvalue = float32(intvalue)
     fvalue2 = float64(int8value)
     int8value = int8(intvalue)
     intvalue = int(fvalue)
     intvalue = int(fvalue2)
+    intvalue = (int)(fvalue)
+    // intvalue = (int)(12 + 1i)    // 复数不能转成int constant 12+1i truncated to integer
     // var i int = int(23.23233)    // constant 23.2323 truncated to integer
     // var bvalue bool = false
     // intvalue = int(bvalue)       // cannot convert bvalue (type bool) to type int
+    stringvalue = string(1111)      // 整数可以转成string，但是反过来不行
+    stringvalue = string([]byte{97, 98})    // []byte 也可以转成string
+    fmt.Println(stringvalue)                // 输出ab
+    bytes := ([]byte)("ab")                 // x是一个字符串， T是[]byte或[]rune
+    fmt.Println(bytes)                      // 输出[97 98]
     // var s23 string = "23"
-    // i = int(s23)                 // cannot convert s23 (type string) to type int
+    // i = int(s23)                         // cannot convert s23 (type string) to type int
+    // stringvalue = string(fvalue)         // 浮点型 和 string 不能互转
 
+    
 
 
     // 变量声明

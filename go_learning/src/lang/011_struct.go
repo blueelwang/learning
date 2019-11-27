@@ -21,6 +21,25 @@ type BookChartItem struct {
 }
 var chart [10]BookChartItem
 
+// 也可以定义类型别名，格式为 type newtype oldtype
+type Map map[string]string
+
+// 为定义的类型添加方法，方法的命名空间的可见性和变量一样，大写开头的方法可以在包外被访问，否则只能 在包内可见
+func (book Books) buy(num int) {
+}
+func (book *Books) totalPrice(num int) {
+}
+
+// 类型方法有一个限制，就是方法的定义必须和类型的定义在同一个包中，
+// 不能再给intbool等预声明类型增加方法，它们是内置的预声明类型，作用域是全局的
+// 只能给自定义的命名类型添加方法
+
+// 使用 type 定义的自定义类型是一个新类型，新类型不能调用原有类型的方法，但是底层类型支持的运算可以被新类型继承
+func (m Map) Print() {
+    for _, key := range m {
+        fmt.Println(key)
+    }
+}
 
 func Demo011() {
 
@@ -29,9 +48,14 @@ func Demo011() {
 
     // 也可以使用 key => value 格式
     fmt.Println(Books{title: "Go 语言", author: "www.runoob.com", subject: "Go 语言教程", bookID: 6495407})
-
     // 忽略的字段为 0 或 空
     fmt.Println(Books{title: "Go 语言", author: "www.runoob.com"})
+
+    // 使用 new() 内置函数创建，宇段默认初始化为其类型的零值， 返回值是指向结构的指针
+    var bookptr *Books = new(Books)
+    bookptr.title = "new出来的title"
+
+
 
     var book1 Books = Books{title: "Go 语言", author: "www.runoob.com"}
     book2 := book1              // 结构体的赋值是拷贝
