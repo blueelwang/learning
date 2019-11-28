@@ -38,11 +38,16 @@ func Demo007() {
 	for i, s := range strings {
 		fmt.Println(i, s)
 	}
+	// 如果只有一个参数，表示的是key，不是value
+	for i := range strings {
+		fmt.Println(i)
+	}
 
 	numbers := [6]int{1, 2, 3, 5}
 	for i, x := range numbers {
 		fmt.Printf("第 %d 位 x 的值 = %d\n", i, x)
 	}
+
 
 	/*
 		Go 语言中 break 语句用于以下两方面：
