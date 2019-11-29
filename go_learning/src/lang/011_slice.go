@@ -4,7 +4,7 @@ import (
     "fmt"
 )
 
-func Demo012() {
+func Demo011() {
 
     /*
     Go 语言的数组的定长性和值拷贝限制了其使用场景， Go 提供了另一种数据类型 slice (切片)

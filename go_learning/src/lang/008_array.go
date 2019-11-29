@@ -2,7 +2,7 @@ package lang
 
 import "fmt"
 
-func Demo009() {
+func Demo008() {
 
     // 数组定义格式 var variable_name [SIZE] variable_type
     var nums [8] int

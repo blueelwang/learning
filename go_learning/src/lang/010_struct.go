@@ -41,7 +41,7 @@ func (m Map) Print() {
     }
 }
 
-func Demo011() {
+func Demo010() {
 
     // 创建一个新的结构体
     fmt.Println(Books{"Go 语言", "www.runoob.com", "Go 语言教程", 6495407})

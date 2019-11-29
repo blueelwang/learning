@@ -82,7 +82,7 @@ func (iPhone Samsung) call() {
     fmt.Println("I am Samsung, I can call you!")
 }
 
-func Demo015() {
+func Demo014() {
     defer exceptionHandler()
     
     var phone Phone
