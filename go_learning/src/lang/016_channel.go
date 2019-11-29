@@ -75,6 +75,30 @@ func Demo016() {
     */
 
 
+
+    /*
+    只读通道 与 只写通道
+
+    定义通道时可以指定通道是只读还是可写的，写法上的区别在于 <- 和 chan 的相对顺序。
+    */
+    readOnly  := make(<-chan int, 10)   // 只读通道
+    writeOnly := make(chan<- int, 10)   // 只写通道
+    v := <-readOnly
+    // readOnly <- v    // invalid operation: readOnly <- v (send to receive-only type <-chan int)
+    writeOnly <- v
+    // v := <-writeOnly // invalid operation: <-writeOnly (receive from send-only type chan<- int)
+
+    // 只读、只写通道不能相互赋值，但是可以把一个普通的通道赋值给一个只读或只写通道，反过来不行。
+    // 这种通常用于方法的赋值，一个形参为只读通道的函数，即使传一个可读可写的通道，在函数内也只能对通道进行读操作。
+    readOnly = make(chan int, 10)
+    // var ch chan int = readOnly  // cannot use readOnly (type <-chan int) as type chan int in assignment
+    writeOnly = make(chan int, 10)
+    // var ch chan int = writeOnly // cannot use writeOnly (type chan<- int) as type chan int in assignment
+
+
+
+
+
     /*
     遍历通道、关闭通道
     */
@@ -88,9 +112,15 @@ func Demo016() {
         fmt.Println(i)
     }
 
-    // len() 返回通道没有被读取的元素数量
-    // cap() 返回通道的容量
-    // 对于无缓冲的通道，len() 和 cap() 都返回0
+
+    /*
+    通道的 len()、cap()
+
+    len() 返回通道没有被读取的元素数量
+    cap() 返回通道的容量
+    对于无缓冲的通道，len() 和 cap() 都返回0
+    */
+
 
 }
 
