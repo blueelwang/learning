@@ -7,6 +7,6 @@ import (
 func main() {
 
 	println("Hello Go World!")
-	lang.Demo015()
+	lang.Demo016()
 
 }
