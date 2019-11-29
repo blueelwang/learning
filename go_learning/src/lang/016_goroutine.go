@@ -42,10 +42,13 @@ func Demo016() {
     go task("55555555555")
     go task("666666666")
     go task("77777777777")
-    task("main")
+    // task("main")
 
 
-    // fun  GOMAXPROCS(n int) int
+    // runtime 包的 func NumGoroutine() int 可以返回当前 goroutine 的数量
+    fmt.Println("NumGoroutine=", runtime.NumGoroutine())
+
+    // fun GOMAXPROCS(n int) int
     // 查询或设置可以井发执行的 goroutine 最大数量
     fmt.Println("GOMAXPROCS=", runtime.GOMAXPROCS(0))       // 传入参数0表示查询当前值
     fmt.Println("GOMAXPROCS=", runtime.GOMAXPROCS(100))     // 参数大于0表示设置指定值，并返回原来的值

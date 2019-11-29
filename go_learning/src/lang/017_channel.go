@@ -23,7 +23,7 @@ func Demo017() {
     // 如果缓冲区已满，会阻塞，直到某个接收方获取到一个值
 
     // ch <- v                  // 把 v 发送到通道 ch
-    // v2 := <-ch               // 从 ch 接收数据，会阻塞直到收到数据
+    // v2 := <-ch               // 从 ch 接收数据，会阻塞直到收到数据，如果通道已经关闭，没有读到数据也会立即返回
 
 
     s := []int{7, 2, 8, -9, 4, 0}
@@ -88,6 +88,10 @@ func Demo017() {
         fmt.Println(i)
     }
 
+    // len() 返回通道没有被读取的元素数量
+    // cap() 返回通道的容量
+    // 对于无缓冲的通道，len() 和 cap() 都返回0
+
 }
 
 func arraySum(s []int, c chan int) {
@@ -107,5 +111,7 @@ func filterLargeValue(s []int, threshold int, c chan int) {
         }
         c <- v
     }
+
+    // 关闭通道，关闭之后，可以继续从通道中读取，但是不能继续写入，也不能重复关闭通道，否则导致panic
     close(c) 
 }
