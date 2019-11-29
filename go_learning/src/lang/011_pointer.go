@@ -2,7 +2,7 @@ package lang
 
 import "fmt"
 
-func Demo009() {
+func DemoPointer() {
 
     value := 3
     var p = &value

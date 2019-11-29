@@ -2,7 +2,7 @@ package lang
 
 import "fmt"
 
-func Demo012() {
+func DemoMap() {
 
     /*
     map 变量声明格式：

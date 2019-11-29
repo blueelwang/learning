@@ -2,7 +2,7 @@ package lang
 
 import "fmt"
 
-func Demo004() {
+func DemoIf() {
 
     value := 1
     if value > 0 {  // 和方法的定义相同，这里的括号也不能单起一行，只能放在行尾

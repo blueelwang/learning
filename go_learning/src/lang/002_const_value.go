@@ -3,7 +3,7 @@ package lang
 import "fmt"
 import "unsafe"
 
-func Demo002() {
+func DemoConstValue() {
 
     /* 常量 */
     const V1 = "2"	// 毕竟立即初始化，const V1 string 这样会编译报错

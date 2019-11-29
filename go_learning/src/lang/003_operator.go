@@ -2,7 +2,7 @@ package lang
 
 import "fmt"
 
-func Demo003() {
+func DemoOperator() {
 
     /*
     算术运算符

@@ -4,7 +4,7 @@ import "fmt"
 
 
 // Go 语言最少有个 main() 函数。
-func Demo007() {
+func DemoFunc() {
     sayHello()
     a, b := 1, 2
     swap(a, b)

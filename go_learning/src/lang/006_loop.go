@@ -2,7 +2,7 @@ package lang
 
 import "fmt"
 
-func Demo006() {
+func DemoLoop() {
 
 	/*
 		循环

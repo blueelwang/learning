@@ -9,7 +9,7 @@ import (
 
 
 
-func Demo015() {
+func DemoGoroutine() {
 
     fmt.Println("strat")
 

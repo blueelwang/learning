@@ -5,7 +5,7 @@ import (
     "fmt"
 )
 
-func Demo016() {
+func DemoChannel() {
 
     /*
     通道 channel

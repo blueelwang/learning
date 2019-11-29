@@ -19,7 +19,7 @@ T  类型的方法集为 S
 func (Data) TestValue() {}
 func (*Data) TestPointer() {}
 
-func Demo021() {
+func DemoMethodSet() {
 
 	// 通过类型实例调用方法，无论值类型实例还是指针类型的实例，都能调用全部方法
 	value := Data{}

@@ -51,7 +51,7 @@ recover() 函数可以捕获异常。
 函数并不能捕获内部新启动的 goroutine 所抛出的异常
 */
 
-func Demo020() {
+func DemoPanic() {
 	deferDemo()
 	defer ignore("defer in Main()")
 	error1()

@@ -31,7 +31,7 @@ func New(text string) error {
 
 */
 
-func Demo019() {
+func DemoError() {
 	res, err := divide(1, 0)
 	fmt.Println(res, err.Error())	// 0 can not divide by 0
 

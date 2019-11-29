@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-func Demo018() {
+func DemoWaitGroup() {
 	
 	/*
 	没有缓冲的通道具有 goroutine 同步的功能，除此之外，sync包也提供了多个同步的机制，主要是通过 WaitGroup 实现的。
