@@ -26,6 +26,7 @@ func DemoMap() {
     delete(m, "Java")
     fmt.Println(m)                          // map[Go:1 PHP:2 C++:1]
 
+    // map 的key需要支持相等判断
     // key 不能是 切片、函数、map等复杂类型
     fmt.Println(make(map[bool]int))
     fmt.Println(make(map[float32]int))
