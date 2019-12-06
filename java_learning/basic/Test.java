@@ -1,15 +1,18 @@
-package main;
+package basic;
 
 public class Test {
 
     public static void main(String[] args) {
-        System.out.printf("%d\n", 5 / -3);
-        System.out.printf("%d\n", 5 / -3);
-        System.out.printf("%d\n", -5 / 3);
+        System.out.println(add(1, 2));                  // 3
+        System.out.println(add("daemoncoder", ".com")); // daemoncoder.com
+    }
 
-        System.out.printf("%d\n", 5 % 3);   // 2
-        System.out.printf("%d\n", -5 % 3);  // -2
-        System.out.printf("%d\n", 5 % -3);  // 2
+    public static int add(int a, int b) {
+        return a + b;
+    }
+    
+    public static String add(String a, String b) {
+        return a + b;
     }
 
 }
