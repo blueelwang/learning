@@ -1,11 +1,12 @@
 package main
 
 import (
-	"lang"
+	"systemcall"
+	// "lang"
 )
 
 func main() {
 
-	lang.DemoReflect()
+	systemcall.PipeDemo()
 
 }
