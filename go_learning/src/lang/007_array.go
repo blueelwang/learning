@@ -15,7 +15,12 @@ func DemoArray() {
     var balance4 = []float32{1000.0, 2.0, 3.4, 7.0, 50.0}
     fmt.Println(nums, balance1, balance2, balance3, balance4)
     // var data1 []int = [3]int{1, 2, 3}   // cannot use [3]int literal (type [3]int) as type []int in assignment
+
     
+    // 数组长度必需是常量，不能是变量
+    // len := 10
+    // darray := make([len]int, 10)     // 编译报错： non-constant array bound len
+
 
     // 组数读写
     nums[0] = 4
