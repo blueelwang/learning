@@ -1,12 +1,14 @@
 package main
 
 import (
-	"systemcall"
+	// "systemcall"
 	// "lang"
+	"web"
 )
 
 func main() {
 
-	systemcall.SocketDemo()
+	// systemcall.SocketDemo()
+	web.WebDemo()
 
 }
