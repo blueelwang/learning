@@ -14,7 +14,7 @@ func main() {
 	// web.WebDemo()
 	// oj.Reverse(1563847412)
 	// systemcall.FileDemo()
-	concurrent.RWMutexDemo()
+	concurrent.OnceDemo()
 
 
 }
