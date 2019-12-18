@@ -1,20 +1,22 @@
 package main
 
 import (
-	"concurrent"
+	// "concurrent"
 	// "oj"
 	// "systemcall"
 	// "lang"
-	// "web"
+	// "test"
+	"test"
 )
 
 func main() {
 
 	// systemcall.SocketDemo()
-	// web.WebDemo()
 	// oj.Reverse(1563847412)
 	// systemcall.FileDemo()
-	concurrent.OnceDemo()
+	// concurrent.OnceDemo()
+	test.GoroutineCostTest()
 
+	//web.WebDemo()
 
 }
