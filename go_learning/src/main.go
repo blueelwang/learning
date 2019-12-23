@@ -1,13 +1,6 @@
 package main
 
-import (
-	// "concurrent"
-	// "oj"
-	// "systemcall"
-	// "lang"
-	// "test"
-	"test"
-)
+import "kafka"
 
 func main() {
 
@@ -15,8 +8,10 @@ func main() {
 	// oj.Reverse(1563847412)
 	// systemcall.FileDemo()
 	// concurrent.OnceDemo()
-	test.GoroutineCostTest()
+	//test.GoroutineCostTest()
 
 	//web.WebDemo()
+
+	kafka.KafkaConsumerDemo()
 
 }
