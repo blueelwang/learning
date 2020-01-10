@@ -1,9 +1,11 @@
 //#include "user/getuid_demo.c"
 //#include "process/fork_demo.c"
 //#include "net/pipe.c"
-#include "test/test.c"
+// #include "test/test.c"
+// #include "syscall/mmap_demo.c"
+#include "string/strcpy_demo.c"
 
 int main() {
-    test();
+    demo();
     return 0;
 }

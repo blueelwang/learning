@@ -7,4 +7,6 @@ go_learning/pkg
 go_learning/src/github.com
 go_learning/src/golang.org
 go_learning/src/x
+go_learning/src/gopkg.in/
 cpp_learning/cmake-build-debug/
+

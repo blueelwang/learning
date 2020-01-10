@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
+#include <fcntl.h>
 
 void demo() {
     int fd[2];
@@ -34,4 +35,20 @@ void demo() {
         exit(errno);
     }
     printf("read data[%s]\n", rdata);
+}
+
+/**
+ * 设置阻塞
+ */
+int fd_set_blocked(int fd, int blocked) {
+	int flags = fcntl(fd, F_GETFL);
+	if (flags < 0) {
+		return -1;
+	}
+	if (blocked) {
+		flags &= ~O_NONBLOCK;
+	} else {
+		flags |= O_NONBLOCK;
+	}
+	return fcntl(fd, F_SETFL, flags);
 }
