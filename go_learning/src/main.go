@@ -1,17 +1,17 @@
 package main
 
-import "kafka"
+import (
+	"oj"
+)
 
 func main() {
 
 	// systemcall.SocketDemo()
-	// oj.Reverse(1563847412)
 	// systemcall.FileDemo()
 	// concurrent.OnceDemo()
 	//test.GoroutineCostTest()
-
-	//web.WebDemo()
-
-	kafka.KafkaConsumerDemo()
+	// web.WebDemo()
+	// kafka.KafkaConsumerDemo()
+	oj.MinWindow()
 
 }

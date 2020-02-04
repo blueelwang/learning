@@ -20,7 +20,13 @@ func DemoMap() {
     fmt.Println(m)                          // map[Go:1 PHP:2 Java:3]
     m["C++"]++                              // 可以对一个原本不存在的key执行++
     fmt.Println(m)                          // map[Go:1 PHP:2 Java:3 C++:1]
-    fmt.Println(m["C"])                     // 输出一个不存在的值，这里输出int的默认值：0
+    fmt.Println(m["C"])                     // 输出一个不存在的值，这里输出int的默认值：0，但是没有此key，此时map中依然没有键C
+
+    // 判断键是否存在
+    _, ok := m["C"]
+    fmt.Println(ok) // false
+    _, ok = m["Java"]
+    fmt.Println(ok) // true
 
     // delete() 函数用于删除集合的元素, 参数为 map 和其对应的 key
     delete(m, "Java")
