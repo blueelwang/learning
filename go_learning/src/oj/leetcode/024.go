@@ -1,4 +1,4 @@
-package oj
+package leetcode
 
 func swapPairs(head *ListNode) *ListNode {
 	if nil == head || nil == head.Next {

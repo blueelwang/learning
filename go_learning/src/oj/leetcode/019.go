@@ -1,4 +1,4 @@
-package oj
+package leetcode
 
 
 type ListNode struct {

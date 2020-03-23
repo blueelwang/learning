@@ -75,7 +75,8 @@ func DemoMap() {
     // map value类型如果是结构体，不能直接修改一个元素中的某个成员变量，必须通过整个元素赋值来修改
     book := Books{"Go", "somebody", "", 0}
     books := map[string]Books{"Go": book}
-    // books["Go"].bookID = 3  // cannot assign to struct field books["Go"].bookID in map
+    // books["Go"].bookID = 3   // cannot assign to struct field books["Go"].bookID in map
+    // (books["Go"]).bookID = 3 // 加上（）也不行，同样报上面的错误
     tmp := books["Go"]
     tmp.bookID = 3
     books["Go"] = tmp   // 整个元素赋值

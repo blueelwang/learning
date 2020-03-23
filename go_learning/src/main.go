@@ -1,7 +1,7 @@
 package main
 
 import (
-	"oj"
+	"oj/leetcode"
 )
 
 func main() {
@@ -12,6 +12,7 @@ func main() {
 	//test.GoroutineCostTest()
 	// web.WebDemo()
 	// kafka.KafkaConsumerDemo()
-	oj.MinWindow()
+	// oj.MinWindow()
+	leetcode.MinWindow()
 
 }
