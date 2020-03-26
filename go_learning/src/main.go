@@ -13,6 +13,6 @@ func main() {
 	// web.WebDemo()
 	// kafka.KafkaConsumerDemo()
 	// oj.MinWindow()
-	leetcode.MinWindow()
+	leetcode.SearchMatrix()
 
 }

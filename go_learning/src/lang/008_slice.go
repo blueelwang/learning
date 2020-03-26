@@ -85,7 +85,7 @@ func DemoSlice() {
     fmt.Println(nums5)              // [0 1 2 3]
     nums5 = append(nums5, 4, 5, 6)  // 添加多个元素
     fmt.Println(nums5)              // [0 1 2 3 4 5 6]
-    nums5 = append(nums5, []int{7, 8, 9}...)  // 通过...把数组转为参数列表
+    nums5 = append(nums5, []int{7, 8, 9}...)  // 通过...把切片转为参数列表
     fmt.Println(nums5)              // [0 1 2 3 4 5 6 7 8 9]
 
     // copy(a, b) 函数把切片b拷贝到a, 但是不会改变a的大小

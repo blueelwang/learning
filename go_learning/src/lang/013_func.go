@@ -49,7 +49,7 @@ func addAll(a float32, b, c, d int, e, f float64) float64 {
     return float64(a) + float64(b) + float64(c) + float64(d) + e + f
 }
 
-// 函数返回多个值
+// 函数返回多个值，多个返回类型声名处用括号包围，括号不能省略
 func say(msg string) (bool, string) {
     fmt.Println(msg)
     return true, msg
