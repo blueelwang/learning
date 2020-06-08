@@ -1,7 +1,7 @@
 package main
 
 import (
-	"oj/leetcode"
+	"libs"
 )
 
 func main() {
@@ -10,9 +10,10 @@ func main() {
 	// systemcall.FileDemo()
 	// concurrent.OnceDemo()
 	// test.GoroutineCostTest()
+	// test.CulCost()
 	// web.WebDemo()
 	// kafka.KafkaConsumerDemo()
 	// oj.MinWindow()
-	leetcode.IsInterleave()
-
+	// leetcode.IsInterleave()
+	libs.TimeDemo()
 }
