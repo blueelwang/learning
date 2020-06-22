@@ -3,7 +3,7 @@
 --- @version 2018-10-22 10:28:06
 ---
 
-package.path='/Users/jianwei18/code/vg/learning/lua_learning/basic/?.lua;'
+package.path='/Users/daemoncoder/code/vg/learning/lua_learning/basic/?.lua;'
 
 -- hello_module定义处有local，这里require的返回要赋给一个变量，不然取不到hello_module变量
 local hello_module = require('hello_module')

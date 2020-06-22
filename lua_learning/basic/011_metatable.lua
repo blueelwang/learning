@@ -5,6 +5,41 @@
 
 
 
+local t = {}
+print(t.url)    --> nil
+-- 通过 getmetatable() 可以取一个表的元表，默认元素为nil
+print(getmetatable(t))      --> nil
+local base = {url = "daemoncoder.com"}
+local mt = {
+    __index = base
+}
+-- 通过 setmetatable() 给表设置一个元表
+setmetatable(t, mt)
+print(t.url)    --> daemoncoder.com
+-- 表t中原本没有定义url字段，本来为nil，但是上面例子中给t设置了元表mt，元表中有__index字段的话，t中取不到某个字段时，就会从元表__index字段对应的表中取，当然如果这个表中依旧没有的话，会继续从这个表的元表中取
+
+local t = {}
+print(t.url)    --> nil
+local base = {url = "daemoncoder.com"}
+local metafunc = function (table, key)
+    -- 这里的 table 变量就是外层 t 变量传入进来的，key 是当前正在取的字段
+    if base[key] then
+        return base[key]
+    else
+        print("Warning: " .. key .. " not exist!")
+        return nil
+    end
+end
+local mt = {
+    __index = metafunc
+}
+-- 通过 setmetatable() 给表设置一个元表
+setmetatable(t, mt)
+print(t.url)    --> daemoncoder.com
+print(t.name)   --> 这里t.name返回nil，还会额外输出一行：Warning: name not exist!
+
+
+
 --在 Lua table 中我们可以访问对应的key来得到value值，但是却无法对两个 table 进行操作。
 --因此 Lua 提供了元表(Metatable)，允许我们改变table的行为，每个行为关联了对应的元方法。
 --例如，使用元表我们可以定义Lua如何计算两个table的相加操作a+b。
@@ -49,29 +84,35 @@ print('-----------------------------')
 --__newindex 元方法用来对表更新，__index则用来对表访问 。
 --当你给表的一个缺少的索引赋值，解释器就会查找__newindex 元方法。
 --如果设置了__newindex元方法，则不在原来的表上进行赋值操作，而是在元表上进行，如果元表设置对应字段的值是函数，则调用函数。
-mymetatable = {}
-mytable = setmetatable({key1 = "value1"}, { __newindex = mymetatable })
-print(mytable.key1)                         --value1
-mytable.newkey = "新值2"
-print(mytable.newkey,mymetatable.newkey)    --nil	新值2
-mytable.newkey = "新值3"
-print(mytable.newkey,mymetatable.newkey)    --nil	新值3
-
-mytable.key1 = "新值1"
-print(mytable.key1,mymetatable.key1)        --新值1	nil
+local t = {}
+local mt = {}
+setmetatable(t, { __newindex = mt })
+t.key1 = "value1"
+print(t.key1, mt.key1)    --> nil	value1
 --以上实例中表设置了元方法 __newindex，在对新索引键（newkey）赋值时（mytable.newkey = "新值2"），会调用元方法，而不进行赋值。
 --而如果对已存在的索引键（key1），则会进行赋值，而不调用元方法 __newindex。
-print('---------------------------------')
-mytable = setmetatable({key1 = "value1"}, {
+setmetatable(t, {
     __newindex = function(mytable, key, value)
-        rawset(mytable, key, "\""..value.."\"")
-
+        print("Adding new item. key: " .. key .. ", value: " .. value)
+        -- 这里的rawset 等价于mytable[key] = value，不涉及任何元方法
+        rawset(mytable, key, value)
     end
 })
-mytable.key1 = "new value"
-mytable.key2 = 4
-print(mytable.key1,mytable.key2)    --new value	"4"
+t.key2 = 1              --> Adding new item. key: key2, value: 1
+print(t.key2, mt.key2)  --> 1, nil
 
+print('------------------ __tostring 元方法 -------------------')
+local table_string = function(table) 
+    local str = ""
+    for k, v in pairs(table) do
+        str = str .. v .. ","
+    end
+    return str
+end
+local t = setmetatable({ 10, 20, 30 }, {
+    __tostring = table_string
+})
+print(t)    --> 10,20,30,
 
 print('---------------- 为表添加操作符 --------------------')
 -- 计算表中最大值，table.maxn在Lua5.2以上版本中已无法使用
@@ -85,28 +126,18 @@ local function table_maxn(t)
     end
     return mn
 end
-mytable = setmetatable({ 1, 2, 3 }, {
-    __add = function(mytable, newtable)
-        for i = 1, table_maxn(newtable) do
-            table.insert(mytable, table_maxn(mytable)+1, newtable[i])
+local table1 = setmetatable({ 1, 2, 3 }, {
+    __add = function(table1, table2)
+        for i = 1, #table2 do
+            table.insert(table1, table_maxn(table1)+1, table2[i])
         end
-        return mytable
-    end
+        return table1
+    end,
+    __tostring = table_string
 })
-
-secondtable = {4,5,6}
-mytable = mytable + secondtable
-for k,v in ipairs(mytable) do
-    print(k,v)
-end
---[[
-1	1
-2	2
-3	3
-4	4
-5	5
-6	6
---]]
+local table2 = {4,5,6}
+local t = table1 + table2
+print(t)    --> 1,2,3,4,5,6,
 
 --- 操作符：
 --- __add	对应的运算符 '+'.
@@ -123,30 +154,20 @@ end
 
 print('------------------ __call 元方法 -------------------')
 -- 定义元方法__call
-mytable = setmetatable({10}, {
-    __call = function(mytable, newtable)
+local t = setmetatable({10}, {
+    __call = function(mytable, param)
         local sum = 0
-        for i = 1, table_maxn(mytable) do
+        for i = 1, #mytable do
             sum = sum + mytable[i]
         end
-        for i = 1, table_maxn(newtable) do
-            sum = sum + newtable[i]
+        for i = 1, #param do
+            sum = sum + param[i]
         end
         return sum
     end
 })
-newtable = {10,20,30}
-print(mytable(newtable))    -- 输出：70
+local param = {10,20,30}
+print(t(param))    --> 70
 
 
-print('------------------ __tostring 元方法 -------------------')
-mytable = setmetatable({ 10, 20, 30 }, {
-    __tostring = function(mytable)
-        local sum = 0
-        for k, v in pairs(mytable) do
-            sum = sum + v
-        end
-        return "表所有元素的和为 " .. sum
-    end
-})
-print(mytable)      -- 输出：表所有元素的和为 60
+
