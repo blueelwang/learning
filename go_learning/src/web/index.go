@@ -14,9 +14,29 @@ func index(writer http.ResponseWriter, request *http.Request) {
 }
 
 func WebDemo() {
+	ServeWithDefaultServeMux()
+	// ServeWithCustomServeMux()
+	// HttpsDemo()
+}
 
+func ServeWithDefaultServeMux() {
 	http.HandleFunc("/", index)
-	http.ListenAndServe(":8900", nil)
-	
+	http.HandleFunc("/login", Login)
+	http.ListenAndServe(":9000", nil)
+}
 
+func ServeWithCustomServeMux() {
+	mux := http.NewServeMux()
+	files := http.FileServer(http.Dir("/public"))
+	mux.Handle("/static", http.StripPrefix("/static", files))
+	mux.HandleFunc("/", index)
+	server := &http.Server{
+		Addr: ":9001",
+		Handler: mux,
+	}
+	server.ListenAndServe()
+}
+
+func HttpsDemo() {
+	http.ListenAndServeTLS(":9002", "cert.pem", "key.pem", nil)
 }

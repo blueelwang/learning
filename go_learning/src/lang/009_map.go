@@ -15,6 +15,7 @@ func DemoMap() {
     m = make(map[string]int)    // 使用 make 函数定义
     m = map[string]int{"Go": 1, "PHP": 2}   // 也可以用数据直接初始化map
     fmt.Println(m)                          // map[Go:1 PHP:2]
+    fmt.Println(m["Lua"])                   // 0, 取不存在的，结果为默认值
 
     m["Java"] = 3
     fmt.Println(m)                          // map[Go:1 PHP:2 Java:3]
@@ -77,9 +78,19 @@ func DemoMap() {
     books := map[string]Books{"Go": book}
     // books["Go"].bookID = 3   // cannot assign to struct field books["Go"].bookID in map
     // (books["Go"]).bookID = 3 // 加上（）也不行，同样报上面的错误
+
+    // 因为从map里获取一个值，是取的一个值的副本，这样直接赋值也没有意义
     tmp := books["Go"]
     tmp.bookID = 3
+    fmt.Println(books["Go"].bookID)    // 输出：0，前面设置bookID为3，没有对map里的数据生效
     books["Go"] = tmp   // 整个元素赋值
+    fmt.Println(books["Go"].bookID)    // 输出：3
 
+    // 如果值是指针类型的话，可以直接操作，因为从map取出的副本和map里的数据都指向同一块内存。
+    type library map[string]*Books
+    lib := library{"Go": &book}
+    lib["Go"].bookID = 5
+    fmt.Println(lib["Go"].bookID)    // 输出 5
+    
 
 }
