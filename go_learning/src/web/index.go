@@ -3,6 +3,7 @@ package web
 import (
 	"fmt"
 	"net/http"
+	"github.com/julienschmidt/httprouter"
 )
 
 func index(writer http.ResponseWriter, request *http.Request) {
@@ -14,9 +15,10 @@ func index(writer http.ResponseWriter, request *http.Request) {
 }
 
 func WebDemo() {
-	ServeWithDefaultServeMux()
+	// ServeWithDefaultServeMux()
 	// ServeWithCustomServeMux()
 	// HttpsDemo()
+	HttpRouterDemo()
 }
 
 func ServeWithDefaultServeMux() {
@@ -39,4 +41,18 @@ func ServeWithCustomServeMux() {
 
 func HttpsDemo() {
 	http.ListenAndServeTLS(":9002", "cert.pem", "key.pem", nil)
+}
+
+func article(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	fmt.Fprintf(w, "Params:%+v", p)
+}
+
+func HttpRouterDemo() {
+	mux := httprouter.New()
+	mux.GET("/article/:name/:id", article)
+	server := http.Server{
+		Addr: ":9002",
+		Handler: mux,
+	}
+	server.ListenAndServe()
 }

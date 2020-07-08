@@ -1,7 +1,7 @@
 package main
 
 import (
-	"web"
+	"go_learning/web"
 )
 
 func main() {
