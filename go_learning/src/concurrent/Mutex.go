@@ -11,20 +11,21 @@ func MutextDemo() {
 	var mutex sync.Mutex
 	// var mutex *sync.Mutex 	// 但是不能支声明一个指针，因为指针的零值是 nil，此时没有对应的实例。
 	mutex.Lock()
+	// mutex.Lock()		 // mutex 不是可重入的，即使在同一个线程中，也不能多次加锁，不然会死锁：fatal error: all goroutines are asleep - deadlock!
 	defer mutex.Unlock() // 未加锁的mutex上调用 Unlock() 会触发一个不可以被恢复的panic： fatal error: sync: unlock of unlocked mutex
 
 	var m sync.Mutex
 	var data []int = make([]int, 3)
-	go conumer(&m, data) // 注意 mutex 传递时要用指针传递，不然值传递会新建一个 mutex
-	producer(&m, data)
+	go conumer(&m, &data) // 注意 mutex 传递时要用指针传递，不然值传递会新建一个 mutex
+	producer(&m, &data)
 
 }
 
-func producer(mutex *sync.Mutex, data []int) {
+func producer(mutex *sync.Mutex, data *[]int) {
 	for {
 		mutex.Lock()
-		if (len(data) < 3) {
-			data = append(data, 1)
+		if (len(*data) < 3) {
+			*data = append(*data, 1)
 			mutex.Unlock()
 		} else {
 			fmt.Println("full")
@@ -33,11 +34,11 @@ func producer(mutex *sync.Mutex, data []int) {
 	}
 }
 
-func conumer(mutex *sync.Mutex, data []int) {
+func conumer(mutex *sync.Mutex, data *[]int) {
 	for {
 		mutex.Lock()
-		if (len(data) > 0) {
-			data = data[1:]
+		if (len(*data) > 0) {
+			*data = (*data)[1:]
 			mutex.Unlock()
 		} else {
 			fmt.Println("empty")
