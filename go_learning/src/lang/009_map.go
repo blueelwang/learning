@@ -29,9 +29,21 @@ func DemoMap() {
     _, ok = m["Java"]
     fmt.Println(ok) // true
 
+    // 取元素数量
+    fmt.Println(len(m))                     // 4
+
+    // map赋值
+    m2 := m
+    fmt.Println(m)                          // map[C++:1 Go:1 Java:3 PHP:2]
+    m2["Go"]++
+    fmt.Println(m)                          // map[C++:1 Go:2 Java:3 PHP:2]  修改的m2,m的值也跟着改变了
+    fmt.Println(m2)                         // map[C++:1 Go:2 Java:3 PHP:2]
+
     // delete() 函数用于删除集合的元素, 参数为 map 和其对应的 key
     delete(m, "Java")
-    fmt.Println(m)                          // map[Go:1 PHP:2 C++:1]
+    fmt.Println(m)                          // map[C++:1 Go:2 PHP:2]
+    delete(m, "Java")                       // 删除不存在的key
+    fmt.Println(m)                          // map[C++:1 Go:2 PHP:2]
 
     // map 的key需要支持相等判断
     // key 不能是 切片、函数、map等复杂类型
@@ -74,12 +86,13 @@ func DemoMap() {
     // Go 内置的 map 不是并发安全的，并发安全的 map 可以 使用标准包 sync 中的 map
 
     // map value类型如果是结构体，不能直接修改一个元素中的某个成员变量，必须通过整个元素赋值来修改
+    //  go 中的 map 的 value 本身是不可寻址的，因为 map 的扩容的时候，可能要做 key/val pair迁移
     book := Books{"Go", "somebody", "", 0}
     books := map[string]Books{"Go": book}
-    // books["Go"].bookID = 3   // cannot assign to struct field books["Go"].bookID in map
-    // (books["Go"]).bookID = 3 // 加上（）也不行，同样报上面的错误
+    // books["Go"].bookID = 3    // cannot assign to struct field books["Go"].bookID in map
+    // (books["Go"]).bookID = 3  // 加上（）也不行，同样报上面的错误
+    // (&books["Go"]).bookID = 3 // cannot take the address of books["Go"]
 
-    // 因为从map里获取一个值，是取的一个值的副本，这样直接赋值也没有意义
     tmp := books["Go"]
     tmp.bookID = 3
     fmt.Println(books["Go"].bookID)    // 输出：0，前面设置bookID为3，没有对map里的数据生效

@@ -4,6 +4,7 @@ import "fmt"
 
 var a = 3   // 全局变量
 
+
 func DemoValuesAndTypes() { // { 不能在像C++那样单独的一行
     // 我是注释
     /*

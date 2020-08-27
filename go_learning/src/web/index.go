@@ -15,22 +15,26 @@ func index(writer http.ResponseWriter, request *http.Request) {
 }
 
 func WebDemo() {
-	// ServeWithDefaultServeMux()
+	ServeWithDefaultServeMux()
 	// ServeWithCustomServeMux()
 	// HttpsDemo()
-	HttpRouterDemo()
+	// HttpRouterDemo()
 }
 
 func ServeWithDefaultServeMux() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/login", Login)
+	http.HandleFunc("/request/url", Request)
+	http.HandleFunc("/response/welcome", ResponseContent)
+	http.HandleFunc("/response/redirect", ResponseHeader)
+	http.HandleFunc("/cookie", Cookie)
 	http.ListenAndServe(":9000", nil)
 }
 
 func ServeWithCustomServeMux() {
 	mux := http.NewServeMux()
-	files := http.FileServer(http.Dir("/public"))
-	mux.Handle("/static", http.StripPrefix("/static", files))
+	// files := http.FileServer(http.Dir("/public"))
+	// mux.Handle("/static", http.StripPrefix("/static", files))
 	mux.HandleFunc("/", index)
 	server := &http.Server{
 		Addr: ":9001",

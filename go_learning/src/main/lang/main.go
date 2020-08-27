@@ -1,7 +1,7 @@
 package main
 
 import (
-	"lang"
+	"go_learning/lang"
 )
 
 func main() {
