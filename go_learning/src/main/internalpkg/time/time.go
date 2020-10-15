@@ -1,7 +1,7 @@
 package main
 
 import (
-	"internalpkg"
+	"go_learning/internalpkg"
 )
 
 func main() {

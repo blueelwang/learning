@@ -1,7 +1,7 @@
 package main
 
 import (
-	"kafka"
+	"go_learning/kafka"
 )
 
 func main() {
