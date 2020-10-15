@@ -1,9 +1,9 @@
 package main
 
 import (
-	"go_learning/lang"
+	"go_learning/rpc"
 )
 
 func main() {
-	lang.DemoContext()
+	rpc.ServerDemo()
 }

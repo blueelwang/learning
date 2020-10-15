@@ -1,9 +1,9 @@
 package main
 
 import (
-	"go_learning/lang"
+	"go_learning/cgo"
 )
 
 func main() {
-	lang.DemoContext()
+	cgo.Demo()
 }
