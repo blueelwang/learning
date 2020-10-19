@@ -4,6 +4,5 @@ linuxc/cmake-build-debug
 .gitignore
 go_learning/bin
 go_learning/pkg
-go_learning/src/vendor
+go_learning/vendor
 cpp_learning/cmake-build-debug/
-
