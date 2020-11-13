@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
-	ratelimit.NewBucket(time.Second * 5, 1)
+	bucket := ratelimit.NewBucket(time.Second * 5, 1)
+	bucket.Available()
 	
 }

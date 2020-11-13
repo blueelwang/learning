@@ -39,6 +39,10 @@ func TimeDemo() {
 	t, _ = time.ParseInLocation("2006-01-02", "2020-03-01", time.Local)
 	fmt.Println(t.AddDate(0, 0, -1).Format("2006-01-02"))	// 2020-02-29
 	fmt.Println(t.AddDate(-1, 0, -1).Format("2006-01-02"))	// 2019-02-28
+	fmt.Println(t.AddDate(0, -1, 0).Format("2006-01-02"))	// 2020-02-01
+
+	t, _ = time.ParseInLocation("2006-01-02", "2020-02-01", time.Local)
+	fmt.Println(t.AddDate(0, 1, -1).Format("2006-01-02"))	// 2020-02-29
 	
 	t, _ = time.ParseInLocation("2006-01-02", "2020-03-31", time.Local)
 	fmt.Println(t.AddDate(0, -1, 0).Format("2006-01-02"))	// 2030-03-02
