@@ -3,7 +3,6 @@ module go_learning
 go 1.12
 
 require (
-	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/Joker/jade v1.0.0 // indirect
 	github.com/Shopify/goreferrer v0.0.0-20181106222321-ec9c9a553398 // indirect
 	github.com/Shopify/sarama v1.26.4
@@ -15,6 +14,7 @@ require (
 	github.com/gavv/monotime v0.0.0-20190418164738-30dba4353424 // indirect
 	github.com/go-playground/validator/v10 v10.4.0
 	github.com/go-sql-driver/mysql v1.5.0
+	github.com/golang/protobuf v1.4.2
 	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/gorilla/schema v1.1.0 // indirect
 	github.com/imkira/go-interpol v1.1.0 // indirect
@@ -41,5 +41,7 @@ require (
 	github.com/yudai/gojsondiff v1.0.0 // indirect
 	github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82 // indirect
 	github.com/yudai/pp v2.0.1+incompatible // indirect
+	google.golang.org/grpc v1.33.2
+	google.golang.org/protobuf v1.25.0
 	moul.io/http2curl v1.0.0 // indirect
 )

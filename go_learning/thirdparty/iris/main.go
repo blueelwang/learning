@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
-	"go_learning/iris/controllers"
+	"go_learning/thirdparty/iris/controllers"
 )
 
 func main() {

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "services/helloservice";
+
+message String {
+    string value = 1;
+}
+
+service HelloService {
+    rpc Hello (String) returns (String);
+}
+
+// protoc --go_out=plugins=grpc:. hello.proto
+// protoc --go-grpc_out=. hello.proto
