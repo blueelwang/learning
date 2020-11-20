@@ -13,7 +13,7 @@ import (
 
 func main() {
 	t0 := time.Now()
-    conn, err := grpc.Dial("localhost:10627", grpc.WithInsecure())
+    conn, err := grpc.Dial("10.221.81.129:10627", grpc.WithInsecure())
     if err != nil {
         log.Fatal(err)
 	}
@@ -62,7 +62,7 @@ func main() {
 				fmt.Printf("RPC Client Call stream.Send() cost: %v\n", t8.Sub(t7))
 			}
 		}()
-		for {
+		for j := 0; j < 3; j++ {
 			t9 := time.Now()
 			reply, err := stream.Recv()
 			t10 := time.Now()
