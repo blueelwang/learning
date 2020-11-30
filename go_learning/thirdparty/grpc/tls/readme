@@ -1,0 +1,18 @@
+
+https://chai2010.cn/advanced-go-programming-book/ch4-rpc/ch4-05-grpc-hack.html
+
+以下命令为服务器和客户端分别生成私钥和证书：
+
+$ openssl genrsa -out server.key 2048
+$ openssl req -new -x509 -days 3650 \
+    -subj "/C=GB/L=China/O=grpc-server/CN=server.grpc.io" \
+    -key server.key -out server.crt
+
+$ openssl genrsa -out client.key 2048
+$ openssl req -new -x509 -days 3650 \
+    -subj "/C=GB/L=China/O=grpc-client/CN=client.grpc.io" \
+    -key client.key -out client.crt
+
+以上命令将生成server.key、server.crt、client.key和client.crt四个文件。
+其中以.key为后缀名的是私钥文件，需要妥善保管。以.crt为后缀名是证书文件，也可以简单理解为公钥文件，并不需要秘密保存。
+在subj参数中的/CN=server.grpc.io表示服务器的名字为server.grpc.io，在验证服务器的证书时需要用到该信息。

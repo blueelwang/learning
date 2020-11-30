@@ -9,14 +9,22 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 func main() {
 	t0 := time.Now()
-    conn, err := grpc.Dial("10.221.81.129:10627", grpc.WithInsecure())
+	creds, err := credentials.NewClientTLSFromFile(
+        "./tls/server.crt", "daemoncoder.com",
+    )
     if err != nil {
         log.Fatal(err)
-	}
+    }
+
+    conn, err := grpc.Dial("10.221.81.129:10627", grpc.WithTransportCredentials(creds))
+    if err != nil {
+        log.Fatal(err)
+    }
 	t1 := time.Now()
 	fmt.Printf("RPC Client Dial() cost: %v\n", t1.Sub(t0))
     defer conn.Close()
@@ -76,4 +84,8 @@ func main() {
 			fmt.Println(reply.GetValue())
 		}
 	}
+}
+
+func clientWithTLS() {
+	
 }
