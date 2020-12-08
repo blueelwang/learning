@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package protobuf_struct;
+
+option go_package = ".;protobuf_struct";
+
+
+message Event {
+    string  utm     = 1;
+    string  scm     = 2;
+    string  spm     = 3;
+    string  spmref  = 4;
+    string  uri     = 5;
+    string  uriref  = 6;
+    string  params  = 7;
+}
+
+message ReportItem {
+    string  user_id         = 1;
+    int64   client_time     = 2;
+    string  session         = 3;
+    int64   event_id        = 4;
+    string  event_type      = 5;
+    Event   event           = 6;
+    string  user_agent      = 7;
+}
+
+message ReportInputParams {
+    repeated ReportItem data = 1;
+}

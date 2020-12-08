@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	cgo.Demo()
+	cgo.DemoCFile()
 }

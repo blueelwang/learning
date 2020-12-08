@@ -100,7 +100,10 @@ func JsonDemo() {
 	fmt.Printf("json=%+v err=%s\n", score, err)	// json={Score:80 Student:0xc000090240} err=%!s(<nil>)
 
 
-
+	// 传入未初始化的指针，不行！！！
+	var scoreUnInited *Score
+	err = json.Unmarshal(j, scoreUnInited)
+	fmt.Printf("json=%+v err=%s\n", scoreUnInited, err)	// json=<nil> err=json: Unmarshal(nil *internalpkg.Score)
 
 
 	
