@@ -26,6 +26,10 @@ func DemoChannel() {
     // v2 := <-ch               // 从 ch 接收数据，会阻塞直到收到数据，如果通道已经关闭，没有读到数据也会立即返回
 
 
+	// 变量必须初始化之后才可以使用，不然会报错
+	// var ch chan interface{}
+	// close(ch)	// panic: close of nil channel
+
     s := []int{7, 2, 8, -9, 4, 0}
     c := make(chan int)
     go arraySum(s[:len(s)/2], c)

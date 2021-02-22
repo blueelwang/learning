@@ -2,15 +2,14 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 )
 
 func main() {
-	fmt.Printf("00000000000000000000")
-	<-time.After(0 * time.Second)
-	fmt.Printf("11111111111111111")
-	arr := []int{}
-	fmt.Printf("%+v\n", IntSliceChunk(arr, 12))
+	f, err := os.OpenFile("./data.tmp", os.O_RDWR | os.O_CREATE | os.O_EXCL, 0664)
+	time.Sleep(10 * time.Second)
+	fmt.Printf("file: %+v, err: %s", f, err)
 }
 
 func IntSliceChunk(data []int, size int) (res [][]int) {

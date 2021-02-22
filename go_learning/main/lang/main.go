@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	lang.DemoContext()
+	lang.DemoChannel()
 }

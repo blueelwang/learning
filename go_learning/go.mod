@@ -1,6 +1,6 @@
 module go_learning
 
-go 1.12
+go 1.14
 
 require (
 	github.com/Joker/jade v1.0.0 // indirect
@@ -8,6 +8,7 @@ require (
 	github.com/Shopify/sarama v1.26.4
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/aymerick/raymond v2.0.2+incompatible // indirect
+	github.com/disintegration/imaging v1.6.2
 	github.com/eknkc/amber v0.0.0-20171010120322-cdade1c07385 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/flosch/pongo2 v0.0.0-20200805083417-63c99409991d // indirect
