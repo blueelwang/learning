@@ -60,5 +60,19 @@ func TimeDemo() {
 	fmt.Println(t.After(t.Add(-1)))	// true
 	fmt.Println(t.Before(t))		// false
 	fmt.Println(t.Before(t.Add(1)))	// true
-	
+}
+
+func TikerDemo() {
+
+	// timer := time.NewTimer(time.Second)
+	// for i := 0; i < 10; i++ {
+	// 	n := <-timer.C
+	// 	fmt.Println(n)
+	// }
+
+	ticker := time.NewTicker(time.Second)
+	for i := 0; i < 10; i++ {
+		n := <-ticker.C
+		fmt.Println(n)
+	}
 }

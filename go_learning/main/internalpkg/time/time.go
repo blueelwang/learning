@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	internalpkg.TimeDemo()
+	internalpkg.TikerDemo()
 }

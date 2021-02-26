@@ -1,0 +1,1 @@
+{"level":"error","ts":1614157742.26402,"caller":"zap/main.go:30","msg":"failed to fetch URL","url":"https://dogkeeper.daemoncoder.com/","backoff":1.5,"stacktrace":"main.main\n\t/Users/daemoncoder/code/vg/learning/go_learning/thirdparty/zap/main.go:30\nruntime.main\n\t/Users/daemoncoder/app/go/go1.14.7/src/runtime/proc.go:203"}
