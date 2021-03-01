@@ -24,7 +24,7 @@ func main() {
 		Username:       "zhang3",
 		PasswordNew:    "li4",
 		PasswordRepeat: "li4",
-		Email:          "sunjianwei1@xiaomi.com",
+		Email:          "daemon-vg@qq.com",
 	}
 	err := validate.Struct(data)
 	if err != nil {

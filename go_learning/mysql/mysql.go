@@ -109,7 +109,7 @@ func PrepareDemo() {
 }
 
 func initDb() (db *sql.DB, err error) {
-	db, err = sql.Open("mysql", "root:SunJianwei627@tcp(127.0.0.1:16033)/dc_article?charset=utf8&timeout=3000ms&parseTime=true&loc=Local")
+	db, err = sql.Open("mysql", "root:password@tcp(127.0.0.1:3306)/dc_article?charset=utf8&timeout=3000ms&parseTime=true&loc=Local")
 	if err != nil {
 		fmt.Printf("init db failed, err:%s\n", err)
 	}
