@@ -16,6 +16,7 @@ require (
 	github.com/go-playground/validator/v10 v10.4.0
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang/protobuf v1.4.2
+	github.com/gomodule/redigo v1.8.4
 	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/gorilla/schema v1.1.0 // indirect
 	github.com/imkira/go-interpol v1.1.0 // indirect
