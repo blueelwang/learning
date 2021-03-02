@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	// "io"
 	"log"
 	"time"
 
@@ -9,7 +10,7 @@ import (
 )
 
 func main() {
-	host := "127.0.0.1"
+	host := "localhost"
 	port := 6379
 	connectTimeout := 3000
 	readTimeout := 3000
@@ -19,9 +20,9 @@ func main() {
 	
 	address := fmt.Sprintf("%s:%d", host, port)
 	conn, err := redis.DialTimeout("tcp", address, 
-			time.Duration(connectTimeout * int(time.Millisecond)),
-			time.Duration(readTimeout * int(time.Millisecond)),
-			time.Duration(writeTimeout * int(time.Millisecond)))
+			time.Duration(connectTimeout) * time.Millisecond,
+			time.Duration(readTimeout) * time.Millisecond,
+			time.Duration(writeTimeout) * time.Millisecond)
 	if err != nil {
 		log.Fatalf("redis connect failed, host:%s, port:%d, err:%s", host, port, err)
 	}
@@ -29,7 +30,7 @@ func main() {
 
 	reply, err := conn.Do("auth", auth)
 	if err != nil {
-		log.Fatalf("redis auth failed, auth:%s, reply:%s, err:%s", auth, reply, err)
+		log.Fatalf("redis auth failed, auth:%s, reply:%v, err:%v", auth, reply, err)
 	}
 
 	reply, err = conn.Do("get", "key")
