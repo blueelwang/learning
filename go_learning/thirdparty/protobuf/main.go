@@ -2,9 +2,12 @@ package main
 
 import (
 	"fmt"
+	// "io/ioutil"
 	// jsonStruct "go_learning/thirdparty/protobuf/report_struct/json_struct"
 	protobufStruct "go_learning/thirdparty/protobuf/report_struct/protobuf_struct"
+	"go_learning/thirdparty/protobuf/spm"
 	"os"
+
 	// "time"
 
 	// "encoding/json"
@@ -28,9 +31,61 @@ import (
 // -----------------------------------
 
 func main() {
+	spmDemo()
 	// protoBufDemo()
 	// jsonDemo()
-	protobufWriteFile()
+	// protobufWriteFile()
+}
+
+func spmDemo() {
+	pb := &spm.ReportInputParams{
+		Events: []*spm.Event{
+			{
+				UserId:     "",
+				ClientTime: 1606752000000,
+				Session:    "",
+				EventId:    999,
+				EventType:  "VIEW",
+				Utm:        "",
+				Spm:        "MiShop_A.Home.transformer.0",
+				Spmref:     "MiShop_A.Home.transformer.0",
+				Scm:        "m1.p1.a1.av1.c1.p1.ext",
+				Scmref:     "m1.p1.a1.av1.c1.p1.ext",
+				Uri:        "https%253a%252f%252fwww.mi.com%252fbuy%252fdetail%253fproduct_id%253d12609",
+				Uriref:     "https%253a%252f%252fwww.mi.com%252fbuy%252fdetail%253fproduct_id%253d12609",
+				Params:     "",
+			},
+			{
+				UserId:     "",
+				ClientTime: 1606752000000,
+				Session:    "",
+				EventId:    998,
+				EventType:  "VIEW",
+				Utm:        "",
+				Spm:        "MiShop_A.Home.transformer.0",
+				Spmref:     "MiShop_A.Home.transformer.0",
+				Scm:        "m1.p1.a1.av1.c1.p1.ext",
+				Scmref:     "m1.p1.a1.av1.c1.p1.ext",
+				Uri:        "https%253a%252f%252fwww.mi.com%252fbuy%252fdetail%253fproduct_id%253d12609",
+				Uriref:     "https%253a%252f%252fwww.mi.com%252fbuy%252fdetail%253fproduct_id%253d12609",
+				Params:     "",
+			},
+		},
+		UserAgent: "ua%253dxxxxx%255cu0001app_channel%253dxxx%255cu0001app_version%253d10",
+	}
+	
+	pbByte, err := proto.Marshal(pb)
+	if err != nil {
+		fmt.Printf("%#v\n", err)
+	}
+	fmt.Printf("data:%s, err:%s\n", pbByte, err)
+	book := spm.ReportInputParams{}
+	if err := proto.Unmarshal(pbByte, &book); err != nil {
+	}
+
+
+	fmt.Printf("data2:%+v\n", &book)
+
 }
 
 // func protoBufDemo() {
