@@ -5,10 +5,9 @@ import (
 	// "io/ioutil"
 	// jsonStruct "go_learning/thirdparty/protobuf/report_struct/json_struct"
 	protobufStruct "go_learning/thirdparty/protobuf/report_struct/protobuf_struct"
-	"go_learning/thirdparty/protobuf/spm"
 	"os"
 
-	// "time"
+	"time"
 
 	// "encoding/json"
 
@@ -31,105 +30,55 @@ import (
 // -----------------------------------
 
 func main() {
-	spmDemo()
-	// protoBufDemo()
+	protoBufDemo()
 	// jsonDemo()
 	// protobufWriteFile()
 }
 
-func spmDemo() {
-	pb := &spm.ReportInputParams{
-		Events: []*spm.Event{
-			{
-				UserId:     "",
-				ClientTime: 1606752000000,
-				Session:    "",
-				EventId:    999,
-				EventType:  "VIEW",
-				Utm:        "",
-				Spm:        "MiShop_A.Home.transformer.0",
-				Spmref:     "MiShop_A.Home.transformer.0",
-				Scm:        "m1.p1.a1.av1.c1.p1.ext",
-				Scmref:     "m1.p1.a1.av1.c1.p1.ext",
-				Uri:        "https%253a%252f%252fwww.mi.com%252fbuy%252fdetail%253fproduct_id%253d12609",
-				Uriref:     "https%253a%252f%252fwww.mi.com%252fbuy%252fdetail%253fproduct_id%253d12609",
-				Params:     "",
-			},
-			{
-				UserId:     "",
-				ClientTime: 1606752000000,
-				Session:    "",
-				EventId:    998,
-				EventType:  "VIEW",
-				Utm:        "",
-				Spm:        "MiShop_A.Home.transformer.0",
-				Spmref:     "MiShop_A.Home.transformer.0",
-				Scm:        "m1.p1.a1.av1.c1.p1.ext",
-				Scmref:     "m1.p1.a1.av1.c1.p1.ext",
-				Uri:        "https%253a%252f%252fwww.mi.com%252fbuy%252fdetail%253fproduct_id%253d12609",
-				Uriref:     "https%253a%252f%252fwww.mi.com%252fbuy%252fdetail%253fproduct_id%253d12609",
-				Params:     "",
+
+
+func protoBufDemo() {
+	var data []byte
+
+	params := protobufStruct.ReportInputParams{
+		Data: []*protobufStruct.ReportItem{
+			&protobufStruct.ReportItem {
+				UserId     : "TMP1601481600000000000001",
+				ClientTime : 1601481600000,
+				Session    : "1234123_asdfwerfasd_123412341234",
+				EventId    : 1,
+				EventType  : "TOUCH",
+				Event      : &protobufStruct.Event{
+					Utm    : "BiMiHome_A.HomeShop.back.0",
+					Scm    : "BiMiHome_A.HomeShop.back.0",
+					Spm    : "BiMiHome_A.HomeShop.back.0",
+					Spmref : "BiMiHome_A.HomeShop.back.0",
+					Uri    : "https://xiaomi.f.mioffice.cN/docs/dock4Jm5lAGXGILv45dsFrYyrX1?sidebarOpen=1",
+					Uriref : "https://xiaomi.f.mioffice.cn/docs/dock4Jm5lAGXGILv45dsFrYyrX1?sidebarOpen=1",
+					Params : "key=value&key=value&key=value&key=value&key=value&key=value&key=value&key=value&key=value",
+				},
+				UserAgent  : "ua=value&os_name=value&os_version=value&network=value&ip=value&app_name=value&app_version=value&app_channel=value&model=value&cgi=value",
 			},
 		},
-		UserAgent: "ua%253dxxxxx%255cu0001app_channel%253dxxx%255cu0001app_version%253d10",
-	}
-	
-	pbByte, err := proto.Marshal(pb)
-	if err != nil {
-		fmt.Printf("%#v\n", err)
-	}
-	fmt.Printf("data:%s, err:%s\n", pbByte, err)
-	book := spm.ReportInputParams{}
-	if err := proto.Unmarshal(pbByte, &book); err != nil {
 	}
 
+	t1 := time.Now()
+	for i := 0; i < 1000000; i++ {
+		data, _ = proto.Marshal(&params)
+	}
+	t2 := time.Now()
+	fmt.Println("----------------------------------")
+	fmt.Printf("protobuf data len: %d\n", len(data))
+	fmt.Printf("proto.Marshal cost: %s\n", t2.Sub(t1))
 
-	fmt.Printf("data2:%+v\n", &book)
-
+	params2 := protobufStruct.ReportInputParams{}
+	t1 = time.Now()
+	for i := 0; i < 1000000; i++ {
+		proto.Unmarshal(data, &params2)
+	}
+	t2 = time.Now()
+	fmt.Printf("proto.Unmarshal cost: %s\n", t2.Sub(t1))
 }
-
-// func protoBufDemo() {
-// 	var data []byte
-
-// 	params := protobufStruct.ReportInputParams{
-// 		Data: []*protobufStruct.ReportItem{
-// 			&protobufStruct.ReportItem {
-// 				UserId     : "TMP1601481600000000000001",
-// 				ClientTime : 1601481600000,
-// 				Session    : "1234123_asdfwerfasd_123412341234",
-// 				EventId    : 1,
-// 				EventType  : "TOUCH",
-// 				Event      : &protobufStruct.Event{
-// 					Utm    : "BiMiHome_A.HomeShop.back.0",
-// 					Scm    : "BiMiHome_A.HomeShop.back.0",
-// 					Spm    : "BiMiHome_A.HomeShop.back.0",
-// 					Spmref : "BiMiHome_A.HomeShop.back.0",
-// 					Uri    : "https://xiaomi.f.mioffice.cN/docs/dock4Jm5lAGXGILv45dsFrYyrX1?sidebarOpen=1",
-// 					Uriref : "https://xiaomi.f.mioffice.cn/docs/dock4Jm5lAGXGILv45dsFrYyrX1?sidebarOpen=1",
-// 					Params : "key=value&key=value&key=value&key=value&key=value&key=value&key=value&key=value&key=value",
-// 				},
-// 				UserAgent  : "ua=value&os_name=value&os_version=value&network=value&ip=value&app_name=value&app_version=value&app_channel=value&model=value&cgi=value",
-// 			},
-// 		},
-// 	}
-
-// 	t1 := time.Now()
-// 	for i := 0; i < 1000000; i++ {
-// 		data, _ = proto.Marshal(&params)
-// 	}
-// 	t2 := time.Now()
-// 	fmt.Println("----------------------------------")
-// 	fmt.Printf("protobuf data len: %d\n", len(data))
-// 	fmt.Printf("proto.Marshal cost: %s\n", t2.Sub(t1))
-
-// 	params2 := protobufStruct.ReportInputParams{}
-// 	t1 = time.Now()
-// 	for i := 0; i < 1000000; i++ {
-// 		proto.Unmarshal(data, &params2)
-// 	}
-// 	t2 = time.Now()
-// 	fmt.Printf("proto.Unmarshal cost: %s\n", t2.Sub(t1))
-// }
 
 // func jsonDemo() {
 // 	var data []byte
