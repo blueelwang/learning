@@ -1,4 +1,4 @@
-package com.daemoncoder.thirdparty.gson;
+package com.daemoncoder.java_learning.thirdparty.gson;
 
 import java.util.HashMap;
 import java.util.Map;

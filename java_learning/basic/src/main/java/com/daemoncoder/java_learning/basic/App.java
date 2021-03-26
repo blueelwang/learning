@@ -1,4 +1,4 @@
-package com.daemoncoder.thirdparty;
+package com.daemoncoder.java_learning.basic;
 
 /**
  * Hello world!
